@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'anuncios',
-    'django_static_fontawesome',
 ]
 
 MIDDLEWARE = [
