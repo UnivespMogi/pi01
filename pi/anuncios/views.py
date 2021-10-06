@@ -21,3 +21,5 @@ def detalhesProduto(request):
 def detalhesServico(request):
     return render(request, 'anuncios/detalhes_servico.html')
 
+def termosPrivacidade(request):
+    return render(request, 'anuncios/termos_privacidade.html')
