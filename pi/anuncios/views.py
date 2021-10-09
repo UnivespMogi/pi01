@@ -18,6 +18,12 @@ def listaServicos(request):
 def detalhesProduto(request):
     return render(request, 'anuncios/detalhes_produto.html')
 
+def detalhesProdutoOriginal(request):
+    return render(request, 'anuncios/detalhes_produto_original.html')
+
+def detalhesProdutoCarrossel(request):
+    return render(request, 'anuncios/detalhes_produto_carrossel.html')
+
 def detalhesServico(request):
     return render(request, 'anuncios/detalhes_servico.html')
 
