@@ -11,8 +11,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/icomoon-social.css' %}">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
@@ -42,36 +41,39 @@
                     </ul>
                 </div>
             </div>
-            <nav class="navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand" href="/">Negocia aí, vizinho!</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
+            <nav id="mainmenu" class="mainmenu">
+                <ul>
+                    <li class="logo-wrapper">
+                        <a href="/"><img src="{% static 'img/logo.png' %}" alt="Multipurpose Twitter Bootstrap Template"></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/produtos/">Produtos</a>
+                    <li>
+                        <h1>Negocia aí, <span style="color: #4f8db3">vizinho!</span></h1>
+                    </li>
+                    <br/>
+                    <li class="{% block menu_home %}{% endblock %}">
+                        <a href="/">Home</a>
+                    </li>
+                    <li class="{% block menu_produtos %}{% endblock %}">
+                        <a href="/produtos/">Produtos</a>
                     </li>                    
-                    <li  class="nav-item">
-                        <a class="nav-link" href="/servicos/">Serviços</a>
+                    <li  class="{% block menu_servicos %}{% endblock %}">
+                        <a href="/servicos/">Serviços</a>
                     </li>
-                    <li  class="nav-item">
-                        <a class="nav-link" href="/como_anunciar/">Como anunciar?</a>
+                    <li  class="{% block menu_anunciar %}{% endblock %}">
+                        <a href="/como_anunciar/">Como anunciar?</a>
                     </li>
-            </div>
-        </nav>
+                </ul>
+            </nav>
         </div>
     </div>
+
     <!-- Page Title -->
     <div class="section section-breadcrumbs">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <p style="color: white; text-align: center;">Negocie produtos e serviços com seus vizinhos</p>
+                    <p style="color: white; text-align: center;">--- Negocie produtos e serviços com seus vizinhos ---</p>
                 </div>
                 <div class="col-md-12">
                     <div class="input-group">
@@ -138,7 +140,7 @@
     <script src="{% static 'js/main-menu.js' %}"></script>
     <script src="{% static 'js/template.js' %}"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
