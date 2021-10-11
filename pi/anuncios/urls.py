@@ -11,5 +11,14 @@ urlpatterns = [
     path('detalhes_produto_original/', views.detalhesProdutoOriginal, name = 'detalhes_produto_original'),
     path('detalhes_produto_carrossel/', views.detalhesProdutoCarrossel, name = 'detalhes_produto_carrossel'),  
     path('detalhes_servico/', views.detalhesServico, name = 'detalhes_servico'),  
-    path('termos_privacidade/', views.termosPrivacidade, name = 'termos_privacidade'),  
+    path('politica_privacidade/', views.politicaPrivacidade, name = 'politica_privacidade'),  
+
+
+    path('fale_conosco/', views.faleConosco, name = 'fale_conosco'),  
+    path('perguntas_respostas/', views.perguntasRespostas, name = 'perguntas_respostas'),  
+    path('login/', views.login, name = 'login'),  
+
+    path('como_anunciar/', views.comoAnunciar, name = 'como_anunciar'),  
+    path('politica_cookies/', views.politicaCookies, name = 'politica_cookies'),  
+    path('termos_uso/', views.termosUso, name = 'termos_uso'),  
 ]

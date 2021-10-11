@@ -27,5 +27,23 @@ def detalhesProdutoCarrossel(request):
 def detalhesServico(request):
     return render(request, 'anuncios/detalhes_servico.html')
 
-def termosPrivacidade(request):
-    return render(request, 'anuncios/termos_privacidade.html')
+def politicaPrivacidade(request):
+    return render(request, 'anuncios/politica_privacidade.html')
+
+def faleConosco(request):
+    return render(request, 'anuncios/fale_conosco.html')
+
+def perguntasRespostas(request):
+    return render(request, 'anuncios/perguntas_respostas.html')
+
+def login(request):
+    return render(request, 'anuncios/login.html')
+
+def comoAnunciar(request):
+    return render(request, 'anuncios/como_anunciar.html')
+
+def politicaCookies(request):
+    return render(request, 'anuncios/politica_cookies.html')
+
+def termosUso(request):
+    return render(request, 'anuncios/termos_uso.html')
