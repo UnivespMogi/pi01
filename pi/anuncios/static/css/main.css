@@ -77,6 +77,7 @@ h1 {
   color: #53555c;
   font-family: 'Open Sans', sans-serif;
   font-weight: 800;
+  font-size: clamp(0.9em, 1em + 1vw, 0.8em);
 }
 h2 {
   color: #53555c;
@@ -2676,4 +2677,3 @@ span.text-color-orange {
 .dropdown.open a.dropdown-toggle .caret {
   border-top: 4px solid #FFF;
 }
-
