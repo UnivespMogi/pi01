@@ -1,10 +1,12 @@
 from django.shortcuts import render
+from .models import Categoria, Produto
 
 def index(request):
     return render(request, 'anuncios/index.html')
 
 def produtos(request):
-    return render(request, 'anuncios/produtos.html')
+    categorias = Categoria.objects.filter(tp_categoria = 'P')
+    return render(request, 'anuncios/produtos.html', {'categorias': categorias})
 
 def servicos(request):
     return render(request, 'anuncios/servicos.html')
