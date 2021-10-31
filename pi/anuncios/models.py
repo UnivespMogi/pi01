@@ -104,3 +104,20 @@ class Residencia(models.Model):
         max_length=45, verbose_name='Nome do Bloco', help_text='Nome do prédio. Ex.: Torre 1, Bloco B, Bloco Camélia.')
     nr_residencia = models.IntegerField(
         verbose_name='Número', choices=STATUS_CHOICES)
+
+
+#Serviços
+class Servico(models.Model):
+    STATUS_CHOICES = (
+       ('A', 'Ativo'),
+       ('I', 'Inativo'),
+    )
+    usuario = models.ForeignKey(User, on_delete=CASCADE, related_name='fk_produto_user2', default=User)
+    categoria = models.ForeignKey('Categoria', on_delete=CASCADE, related_name='fk_servico_categoria1')
+    tx_titulo_servico = models.CharField(max_length=80, verbose_name='Titulo do Serviço')
+    dc_servico = models.TextField(verbose_name='Descrição do Serviço')
+    dt_cadastro = models.DateTimeField(verbose_name='Data do Cadastro', auto_now_add=True)
+    st_servico = models.CharField(max_length=1, verbose_name='Situação do Serviço', choices=STATUS_CHOICES)
+
+    def __str__(self):
+        return self.tx_titulo_servico

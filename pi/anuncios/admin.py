@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Categoria, Produto, Condominio, Residencia, Contato
+from .models import Categoria, Produto, Condominio, Residencia, Contato, Servico
 
 # Categoria
 admin.site.register(Categoria)
@@ -15,3 +15,6 @@ admin.site.register(Contato)
 
 # Residência
 admin.site.register(Residencia)
+
+#Serviço
+admin.site.register(Servico)

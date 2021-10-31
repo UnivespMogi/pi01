@@ -8,14 +8,17 @@
                 <!-- Título da categoria -->
                 <h2>Categoria de Serviços</h2>
 	        	<div class="row">
+					{% for categoria in categorias %}
 	        		<div class="col-md-2 col-sm-6">
 	        			<div class="service-wrapper">
                             <a href="/lista_servicos/">
-                            <i class="fas fa-tools fa-3x"></i>
-		        			<h3>Reformas e Reparos</h3>
+							<i class="fas fa-{{categoria.nm_icone}}"></i>
+		        			<h3>{{categoria.nm_categoria}}</h3>
 							</a>
 	        			</div>
 	        		</div>
+					{% endfor %}
+					<!--
 	        		<div class="col-md-2 col-sm-6">
 	        			<div class="service-wrapper">
                             <i class="fas fa-satellite-dish fa-3x"></i>
@@ -45,7 +48,7 @@
                             <i class="fas fa-glass-cheers fa-3x"></i>
 		        			<h3>Eventos e Festas</h3>
 	        			</div>
-	        		</div>
+	        		</div>-->
 	        	</div>
 	        </div>
 	    </div>
