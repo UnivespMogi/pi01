@@ -16,7 +16,7 @@ class Categoria(models.Model):
         max_length=150, verbose_name='Nome da Categoria')
     tp_categoria = models.CharField(
         max_length=1, verbose_name='Tipo de Categoria', choices=STATUS_CHOICES)
-    nm_icone = models.CharField(max_length=20, verbose_name='Nome do Ícone',
+    nm_icone = models.CharField(max_length=30, verbose_name='Nome do Ícone',
                                 help_text='Opções no site https://fontawesome.com.')
 
     def __str__(self):

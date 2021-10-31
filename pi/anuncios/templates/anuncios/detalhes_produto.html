@@ -35,7 +35,7 @@
                 </div>
                 <div class="col-md-5">
                     <div class="">
-                        <h2 class="name">Câmera Semi Profissional</h2>
+                        <h2 class="name">{{produto.nm_produto}}</h2>
                         <div class="d-flex flex-row align-items-center">
                             <div class="p-ratings"> 
                                 <i class="fa fa-star"></i> 
@@ -46,7 +46,7 @@
                         </div>
 
                         <br />
-                        <h3>R$ 100,00</h3>
+                        <h3>R$ {{produto.vl_produto|floatformat:2}}</h3>
                         <div class="d-flex flex-row align-items-center"> 
                             <i class="fas fa-info-circle"></i>
                             <span class="ml-1">Produto Usado</span>
@@ -56,18 +56,25 @@
                         </div>
                         <br />
                         <div class="product-description">
-                            <p><strong>Descrição</strong></p>
+                            <p><strong>{{produto.dc_produto}}</strong></p>
                             <p>                          
                                 Produto em ótimo estado. Possui uma resolução excelente e não apresenta riscos ou manchas. Fácil utilização.
                             </p>
                             <p>
                                 Acompanha cabo de dados, tampa da lente e manual de instruções.
                             </p>
+                            <br>
 
-                            <p><strong>Contato(s): </strong>
+                            <h4>{{produto.usuario}}<h4>
+                                
+                            
+                            <strong>Contato(s):
+
+                            </p>
                             <i class="fab fa-whatsapp fa-2x"></i> 
                             <i class="far fa-envelope fa-2x"></i> 
                             <p>
+                            </Strong>
                             <!-- 
                                 <i class="fab fa-instagram fa-2x"></i> 
                                 <i class="fab fa-facebook fa-2x"></i> 

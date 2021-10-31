@@ -6,18 +6,19 @@
 <div class="section">
 	    	<div class="container">
                 <!-- Lista de Produtos -->
-                <h2>Reformas e Reparos</h2>            
+                <h2>{{categoria.nm_categoria}}</h2>            
 				<div class="row">
+					{% for servico in servicos %}
 					<div class="col-sm-4">
 						<!-- Product -->
 						<div class="shop-item">
 							<!-- Product Image -->
 							<div class="image">
-								<a href="/detalhes_servico/"><img src="{% static 'img/product1.jpg' %}" alt="Item Name"></a>
+								<a href="/detalhes_servico/{{servico.id}}"><img src="{% static 'img/product1.jpg' %}" alt="Item Name"></a>
 							</div>
 							<!-- Product Title -->
 							<div class="title">
-								<h3><a href="/detalhes_servico/">Lorem ipsum dolor</a></h3>
+								<h3><a href="/detalhes_servico/{{servico.id}}">{{servico.tx_titulo_servico }}</a></h3>
 							</div>
 							<!-- Product Available Colors-->
 							<div class="colors">
@@ -28,20 +29,16 @@
 								<span class="color-green"></span>
 							</div>
 							<!-- Product Price-->
-							<div class="price">
-								<span class="price-was">$959.99</span> $999.99
-							</div>
 							<!-- Product Description-->
 							<div class="description">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mattis, nulla id pretium malesuada, dui est laoreet risus, ac rhoncus eros diam id odio.</p>
-							</div>
-							<!-- Add to Cart Button -->
-							<div class="actions">
-								<a href="page-product-details.html" class="btn"><i class="icon-shopping-cart icon-white"></i> Add to Cart</a>
+								<p>{{servico.dc_servico}}</p>
 							</div>
 						</div>
 						<!-- End Product -->
 					</div>
+					{% endfor %}
+					<!--
+					
 					<div class="col-sm-4">
 						<div class="shop-item">
 							<div class="image">
@@ -161,7 +158,7 @@
 								<a href="page-product-details.html" class="btn"><i class="icon-shopping-cart icon-white"></i> Add to Cart</a>
 							</div>
 						</div>
-					</div>
+					</div>-->
 				</div>
 				<nav aria-label="Page navigation example">
 					<ul class="pagination">

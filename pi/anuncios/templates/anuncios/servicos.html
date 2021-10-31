@@ -11,8 +11,8 @@
 					{% for categoria in categorias %}
 	        		<div class="col-md-2 col-sm-6">
 	        			<div class="service-wrapper">
-                            <a href="/lista_servicos/">
-							<i class="fas fa-{{categoria.nm_icone}}"></i>
+                            <a href="/lista_servicos/{{categoria.id}}">
+							<i class="{{categoria.nm_icone}}"></i>
 		        			<h3>{{categoria.nm_categoria}}</h3>
 							</a>
 	        			</div>

@@ -1,5 +1,6 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render
-from .models import Categoria, Produto
+from .models import Categoria, Produto, Servico
 
 def index(request):
     return render(request, 'anuncios/index.html')
@@ -12,14 +13,19 @@ def servicos(request):
     categorias = Categoria.objects.filter(tp_categoria = 'S')
     return render(request, 'anuncios/servicos.html', {'categorias': categorias})
 
-def listaProdutos(request):
-    return render(request, 'anuncios/lista_produtos.html')
+def listaProdutos(request,id):
+    produtos = Produto.objects.filter(categoria=id)
+    categoria = Categoria.objects.get(id=id)
+    return render(request, 'anuncios/lista_produtos.html', {'produtos': produtos,'categoria':categoria})
 
-def listaServicos(request):
-    return render(request, 'anuncios/lista_servicos.html')
+def listaServicos(request,id):
+    servicos = Servico.objects.filter(categoria=id)
+    categoria = Categoria.objects.get(id=id)
+    return render(request, 'anuncios/lista_servicos.html', {'servicos': servicos,'categoria':categoria})
 
-def detalhesProduto(request):
-    return render(request, 'anuncios/detalhes_produto.html')
+def detalhesProduto(request,id):
+    produto = Produto.objects.get(id=id)
+    return render(request, 'anuncios/detalhes_produto.html', {'produto': produto})
 
 def detalhesProdutoOriginal(request):
     return render(request, 'anuncios/detalhes_produto_original.html')
@@ -27,8 +33,9 @@ def detalhesProdutoOriginal(request):
 def detalhesProdutoCarrossel(request):
     return render(request, 'anuncios/detalhes_produto_carrossel.html')
 
-def detalhesServico(request):
-    return render(request, 'anuncios/detalhes_servico.html')
+def detalhesServico(request,id):
+    servico = Servico.objects.get(id=id)
+    return render(request, 'anuncios/detalhes_servico.html',{'servico':servico})
 
 def politicaPrivacidade(request):
     return render(request, 'anuncios/politica_privacidade.html')
