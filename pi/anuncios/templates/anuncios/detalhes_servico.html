@@ -34,18 +34,35 @@
 							{{servico.dc_servico}}
 
 						</p>
-						<ul class="no-list-style">
-							<li><b>Contatos:</b> (11) 88889-99999</li>
-							<li><b>Categoria:</b> Beleza</li>
-							<br />
-							<li>
-								<i class="fab fa-instagram fa-2x"></i> 
-								<i class="fab fa-facebook fa-2x"></i> 
-								<i class="fab fa-pinterest fa-2x"></i> 
-								<i class="fab fa-whatsapp fa-2x"></i> 
-								<i class="fab fa-twitter fa-2x"></i>
-							</li>		
-						</ul>
+
+						<br>
+						<h4>Fornecedor: {{servico.usuario}}<h4>
+
+
+
+						<strong>Contato(s):
+
+                         
+                           
+                            {% ifequal contato.tp_contato "Telefone" %}        
+                                <i class="fas fa-phone fa-2x"></i> 
+                            {% endifequal %}
+                 
+                            {% ifequal contato.tp_contato "WhatsApp" %}        
+                                <i class="fab fa-whatsapp fa-2x"></i> 
+                            {% endifequal %}
+
+                            {% ifequal contato.tp_contato "Telegram" %}        
+                                <i class="fab fa-telegram fa-2x"></i> 
+                            {% endifequal %}
+
+                            {% ifequal contato.tp_contato "E-mail" %}        
+                                <i class="fas fa-envelope fa-2x"></i> 
+                            {% endifequal %}
+
+                           {{contato.tx_contato}}
+                            </Strong>
+
 					</div>
                 </div>
             </div>

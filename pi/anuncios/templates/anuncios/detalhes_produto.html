@@ -2,6 +2,7 @@
 {% load static %}
 {% block menu_produtos %}active{% endblock %}
 {% block content %}
+{% load humanize %}
 
 <div class="section">
     <div class="container">
@@ -57,24 +58,36 @@
                         <br />
                         <div class="product-description">
                             <p><strong>{{produto.dc_produto}}</strong></p>
-                            <p>                          
-                                Produto em ótimo estado. Possui uma resolução excelente e não apresenta riscos ou manchas. Fácil utilização.
-                            </p>
-                            <p>
-                                Acompanha cabo de dados, tampa da lente e manual de instruções.
-                            </p>
+
                             <br>
 
-                            <h4>{{produto.usuario}}<h4>
+                            <h4>Fornecedor: {{produto.usuario}}<h4>
                                 
                             
                             <strong>Contato(s):
 
-                            </p>
-                            <i class="fab fa-whatsapp fa-2x"></i> 
-                            <i class="far fa-envelope fa-2x"></i> 
-                            <p>
+                         
+                           
+                            {% ifequal contato.tp_contato "Telefone" %}        
+                                <i class="fas fa-phone fa-2x"></i> 
+                            {% endifequal %}
+                 
+                            {% ifequal contato.tp_contato "WhatsApp" %}        
+                                <i class="fab fa-whatsapp fa-2x"></i> 
+                            {% endifequal %}
+
+                            {% ifequal contato.tp_contato "Telegram" %}        
+                                <i class="fab fa-telegram fa-2x"></i> 
+                            {% endifequal %}
+
+                            {% ifequal contato.tp_contato "E-mail" %}        
+                                <i class="fas fa-envelope fa-2x"></i> 
+                            {% endifequal %}
+
+                           {{contato.tx_contato}}
                             </Strong>
+
+
                             <!-- 
                                 <i class="fab fa-instagram fa-2x"></i> 
                                 <i class="fab fa-facebook fa-2x"></i> 

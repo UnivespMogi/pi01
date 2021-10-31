@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render
-from .models import Categoria, Produto, Servico
+from .models import Categoria, Produto, Servico, Contato
 
 def index(request):
     return render(request, 'anuncios/index.html')
@@ -25,7 +25,8 @@ def listaServicos(request,id):
 
 def detalhesProduto(request,id):
     produto = Produto.objects.get(id=id)
-    return render(request, 'anuncios/detalhes_produto.html', {'produto': produto})
+    contato = Contato.objects.get()
+    return render(request, 'anuncios/detalhes_produto.html', {'produto': produto,'contato' : contato})
 
 def detalhesProdutoOriginal(request):
     return render(request, 'anuncios/detalhes_produto_original.html')
@@ -35,7 +36,9 @@ def detalhesProdutoCarrossel(request):
 
 def detalhesServico(request,id):
     servico = Servico.objects.get(id=id)
-    return render(request, 'anuncios/detalhes_servico.html',{'servico':servico})
+    contato = Contato.objects.get()
+    return render(request, 'anuncios/detalhes_servico.html',{'servico':servico,'contato' : contato})
+
 
 def politicaPrivacidade(request):
     return render(request, 'anuncios/politica_privacidade.html')
