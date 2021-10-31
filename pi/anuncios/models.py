@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib import admin
 from django.db.models.deletion import CASCADE
 from django.contrib.auth.models import User
-from django.db.models.fields import CharField, DateTimeField
+from django.db.models.fields import CharField, DateTimeField, IntegerField
 
 # Categoria
 
@@ -77,7 +77,7 @@ class Contato(models.Model):
         ('E-Mail', 'E-Mail'),
     )
     condominios = models.ForeignKey(
-        'Condominio', on_delete=CASCADE, related_name='fk_contato_condominio1')
+        'Condominio', on_delete=CASCADE, related_name='fk_contato_condominio1', null=True)
     usuario = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='fk_contato_user1', null=True)
     tp_contato = models.CharField(
@@ -104,3 +104,16 @@ class Residencia(models.Model):
         max_length=45, verbose_name='Nome do Bloco', help_text='Nome do prédio. Ex.: Torre 1, Bloco B, Bloco Camélia.')
     nr_residencia = models.IntegerField(
         verbose_name='Número', choices=STATUS_CHOICES)
+
+
+# Avaliação do Anunciante
+class Avaliacao(models.Model):
+    cliente = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='fk_avaliacao_user1')
+    anunciante = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='fk_avaliacao_user2')
+    vl_nota = IntegerField(verbose_name='Nota')
+    tx_comentario = CharField(
+        max_length=150, verbose_name='Comentário', null=True)
+    dt_cadastro = DateTimeField(
+        verbose_name='Data do Cadastro', auto_now_add=True)
