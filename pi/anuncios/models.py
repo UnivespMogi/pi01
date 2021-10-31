@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib import admin
 from django.db.models.deletion import CASCADE
 from django.contrib.auth.models import User
-from django.db.models.fields import CharField, DateTimeField
+from django.db.models.fields import CharField, DateTimeField, IntegerField
 
 # Categoria
 
@@ -77,7 +77,7 @@ class Contato(models.Model):
         ('E-Mail', 'E-Mail'),
     )
     condominios = models.ForeignKey(
-        'Condominio', on_delete=CASCADE, related_name='fk_contato_condominio1')
+        'Condominio', on_delete=CASCADE, related_name='fk_contato_condominio1', null=True)
     usuario = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='fk_contato_user1', null=True)
     tp_contato = models.CharField(
@@ -106,18 +106,36 @@ class Residencia(models.Model):
         verbose_name='Número', choices=STATUS_CHOICES)
 
 
-#Serviços
+# Avaliação do Anunciante
+class Avaliacao(models.Model):
+    cliente = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='fk_avaliacao_user1')
+    anunciante = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='fk_avaliacao_user2')
+    vl_nota = IntegerField(verbose_name='Nota')
+    tx_comentario = CharField(
+        max_length=150, verbose_name='Comentário', null=True)
+    dt_cadastro = DateTimeField(
+        verbose_name='Data do Cadastro', auto_now_add=True)
+# Serviços
+
+
 class Servico(models.Model):
     STATUS_CHOICES = (
-       ('A', 'Ativo'),
-       ('I', 'Inativo'),
+        ('A', 'Ativo'),
+        ('I', 'Inativo'),
     )
-    usuario = models.ForeignKey(User, on_delete=CASCADE, related_name='fk_produto_user2', default=User)
-    categoria = models.ForeignKey('Categoria', on_delete=CASCADE, related_name='fk_servico_categoria1')
-    tx_titulo_servico = models.CharField(max_length=80, verbose_name='Titulo do Serviço')
+    usuario = models.ForeignKey(
+        User, on_delete=CASCADE, related_name='fk_produto_user2', default=User)
+    categoria = models.ForeignKey(
+        'Categoria', on_delete=CASCADE, related_name='fk_servico_categoria1')
+    tx_titulo_servico = models.CharField(
+        max_length=80, verbose_name='Titulo do Serviço')
     dc_servico = models.TextField(verbose_name='Descrição do Serviço')
-    dt_cadastro = models.DateTimeField(verbose_name='Data do Cadastro', auto_now_add=True)
-    st_servico = models.CharField(max_length=1, verbose_name='Situação do Serviço', choices=STATUS_CHOICES)
+    dt_cadastro = models.DateTimeField(
+        verbose_name='Data do Cadastro', auto_now_add=True)
+    st_servico = models.CharField(
+        max_length=1, verbose_name='Situação do Serviço', choices=STATUS_CHOICES)
 
     def __str__(self):
         return self.tx_titulo_servico
