@@ -117,3 +117,25 @@ class Avaliacao(models.Model):
         max_length=150, verbose_name='Comentário', null=True)
     dt_cadastro = DateTimeField(
         verbose_name='Data do Cadastro', auto_now_add=True)
+# Serviços
+
+
+class Servico(models.Model):
+    STATUS_CHOICES = (
+        ('A', 'Ativo'),
+        ('I', 'Inativo'),
+    )
+    usuario = models.ForeignKey(
+        User, on_delete=CASCADE, related_name='fk_produto_user2', default=User)
+    categoria = models.ForeignKey(
+        'Categoria', on_delete=CASCADE, related_name='fk_servico_categoria1')
+    tx_titulo_servico = models.CharField(
+        max_length=80, verbose_name='Titulo do Serviço')
+    dc_servico = models.TextField(verbose_name='Descrição do Serviço')
+    dt_cadastro = models.DateTimeField(
+        verbose_name='Data do Cadastro', auto_now_add=True)
+    st_servico = models.CharField(
+        max_length=1, verbose_name='Situação do Serviço', choices=STATUS_CHOICES)
+
+    def __str__(self):
+        return self.tx_titulo_servico

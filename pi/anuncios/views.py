@@ -9,7 +9,8 @@ def produtos(request):
     return render(request, 'anuncios/produtos.html', {'categorias': categorias})
 
 def servicos(request):
-    return render(request, 'anuncios/servicos.html')
+    categorias = Categoria.objects.filter(tp_categoria = 'S')
+    return render(request, 'anuncios/servicos.html', {'categorias': categorias})
 
 def listaProdutos(request):
     return render(request, 'anuncios/lista_produtos.html')
