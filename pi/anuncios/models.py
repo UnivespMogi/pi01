@@ -31,9 +31,9 @@ class Produto(models.Model):
         ('I', 'Inativo'),
     )
     usuario = models.ForeignKey(
-        User, on_delete=CASCADE, related_name='fk_produto_user1', default=User)
+        User, on_delete=CASCADE, related_name='fk_produto_user1', default=User, null=True)
     categoria = models.ForeignKey(
-        'Categoria', on_delete=CASCADE, related_name='fk_produto_categoria1')
+        'Categoria', on_delete=CASCADE, related_name='fk_produto_categoria1', limit_choices_to={'tp_categoria': 'P'})
     nm_produto = models.CharField(
         max_length=150, verbose_name='Nome do Produto')
     dc_produto = models.TextField(verbose_name='Descrição')
@@ -128,7 +128,7 @@ class Servico(models.Model):
     usuario = models.ForeignKey(
         User, on_delete=CASCADE, related_name='fk_produto_user2', default=User)
     categoria = models.ForeignKey(
-        'Categoria', on_delete=CASCADE, related_name='fk_servico_categoria1')
+        'Categoria', on_delete=CASCADE, related_name='fk_servico_categoria1', limit_choices_to={'tp_categoria': 'S'})
     tx_titulo_servico = models.CharField(
         max_length=80, verbose_name='Titulo do Serviço')
     dc_servico = models.TextField(verbose_name='Descrição do Serviço')
