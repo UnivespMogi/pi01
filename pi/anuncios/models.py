@@ -4,6 +4,25 @@ from django.db.models.deletion import CASCADE
 from django.contrib.auth.models import User
 from django.db.models.fields import CharField, DateTimeField, IntegerField
 
+from django.utils import timezone
+import os
+from uuid import uuid4
+
+# renomear o arquivo caso tenha no diretorio imagens
+def path_and_rename(instance, filename):
+    upload_to = 'static\imagens'
+    ext = filename.split('.')[-1]
+    # get filename
+    if instance.pk:
+        filename = '{}.{}'.format(instance.pk, ext)
+    else:
+        # set filename as random string
+        filename = '{}.{}'.format(uuid4().hex, ext)
+    # return the whole path to the file
+    
+    return os.path.join(upload_to, filename)
+
+
 # Categoria
 
 
@@ -42,6 +61,7 @@ class Produto(models.Model):
         verbose_name='Data do Cadastro', auto_now_add=True)
     st_produto = models.CharField(
         max_length=1, verbose_name='Situação do Produto', choices=STATUS_CHOICES)
+    imagem =models.ImageField ('img', upload_to=path_and_rename, null=True)
 
     def __str__(self):
         return self.nm_produto
@@ -136,6 +156,7 @@ class Servico(models.Model):
         verbose_name='Data do Cadastro', auto_now_add=True)
     st_servico = models.CharField(
         max_length=1, verbose_name='Situação do Serviço', choices=STATUS_CHOICES)
+    imagem = models.ImageField ('img', upload_to=path_and_rename, null=True)
 
     def __str__(self):
         return self.tx_titulo_servico
