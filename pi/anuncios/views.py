@@ -14,19 +14,19 @@ def servicos(request):
     return render(request, 'anuncios/servicos.html', {'categorias': categorias})
 
 def listaProdutos(request,id):
-    produtos = Produto.objects.filter(categoria=id)
+    produtos = Produto.objects.filter(categoria=id,st_produto='A')
     categoria = Categoria.objects.get(id=id)
     return render(request, 'anuncios/lista_produtos.html', {'produtos': produtos,'categoria':categoria})
 
 def listaServicos(request,id):
-    servicos = Servico.objects.filter(categoria=id)
+    servicos = Servico.objects.filter(categoria=id,st_servico='A')
     categoria = Categoria.objects.get(id=id)
     return render(request, 'anuncios/lista_servicos.html', {'servicos': servicos,'categoria':categoria})
 
-def detalhesProduto(request,id):
+def detalhesProduto(request  ,id ):
     produto = Produto.objects.get(id=id)
-    contato = Contato.objects.get()
-    return render(request, 'anuncios/detalhes_produto.html', {'produto': produto,'contato' : contato})
+    contatos = Contato.objects.filter(usuario = produto.usuario)
+    return render(request, 'anuncios/detalhes_produto.html', {'produto': produto,'contatos' : contatos})
 
 def detalhesProdutoOriginal(request):
     return render(request, 'anuncios/detalhes_produto_original.html')
@@ -36,8 +36,8 @@ def detalhesProdutoCarrossel(request):
 
 def detalhesServico(request,id):
     servico = Servico.objects.get(id=id)
-    contato = Contato.objects.get()
-    return render(request, 'anuncios/detalhes_servico.html',{'servico':servico,'contato' : contato})
+    contatos = Contato.objects.filter(usuario = servico.usuario)
+    return render(request, 'anuncios/detalhes_servico.html',{'servico':servico,'contatos' : contatos})
 
 
 def politicaPrivacidade(request):
