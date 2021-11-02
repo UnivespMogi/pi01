@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from .models import Categoria, Produto, Servico, Contato
+from random import shuffle
 
 def index(request):
     return render(request, 'anuncios/index.html')
@@ -14,9 +15,12 @@ def servicos(request):
     return render(request, 'anuncios/servicos.html', {'categorias': categorias})
 
 def listaProdutos(request,id):
-    produtos = Produto.objects.filter(categoria=id,st_produto='A')
+    produtos = list(Produto.objects.filter(categoria=id,st_produto='A'))
+    shuffle(produtos)
     categoria = Categoria.objects.get(id=id)
+    print(produtos)
     return render(request, 'anuncios/lista_produtos.html', {'produtos': produtos,'categoria':categoria})
+
 
 def listaServicos(request,id):
     servicos = Servico.objects.filter(categoria=id,st_servico='A')
