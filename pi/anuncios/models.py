@@ -45,8 +45,8 @@ class Produto(models.Model):
         ('A', 'Ativo'),
         ('I', 'Inativo'),
     )
-    #usuario = models.ForeignKey(
-        #User, on_delete=CASCADE, related_name='fk_produto_user1', default=User, null=True)
+    usuario = models.ForeignKey(
+        User, on_delete=CASCADE, related_name='fk_produto_user1', default=User, null=True)
     categoria = models.ForeignKey(
         'Categoria', on_delete=CASCADE, related_name='fk_produto_categoria1', limit_choices_to={'tp_categoria': 'P'})
     nm_produto = models.CharField(
@@ -71,7 +71,7 @@ class Condominio(models.Model):
     nr_logradouro = models.IntegerField(verbose_name='Número', null=True)
     nm_bairro = models.CharField(max_length=45, verbose_name='Bairro')
     tx_complemento = models.CharField(
-        max_length=45, verbose_name='Complemento')
+        max_length=45, verbose_name='Complemento', null=True)
     cep = models.CharField(max_length=8, verbose_name='CEP')
     nm_cidade = CharField(max_length=60, verbose_name='Cidade')
     dt_cadastro = DateTimeField(
@@ -102,8 +102,8 @@ class Contato(models.Model):
 class Residencia(models.Model):
     condominios = models.ForeignKey(
         'Condominio', on_delete=CASCADE, related_name='fk_residencia_condominio1')
-    #usuario = models.ForeignKey(
-        #User, on_delete=models.CASCADE, related_name='fk_residencia_user1', default=User)
+    usuario = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='fk_residencia_user1')
     nm_bloco = models.CharField(
         max_length=45, verbose_name='Nome do Bloco', help_text='Nome do prédio. Ex.: Torre 1, Bloco B, Bloco Camélia.')
     nr_residencia = models.IntegerField(
@@ -112,10 +112,10 @@ class Residencia(models.Model):
 
 # Avaliação do Anunciante
 class Avaliacao(models.Model):
-    #cliente = models.ForeignKey(
-        #User, on_delete=models.CASCADE, related_name='fk_avaliacao_user1')
-    #anunciante = models.ForeignKey(
-        #User, on_delete=models.CASCADE, related_name='fk_avaliacao_user2')
+    cliente = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='fk_avaliacao_user1')
+    anunciante = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='fk_avaliacao_user2')
     vl_nota = IntegerField(verbose_name='Nota')
     tx_comentario = CharField(
         max_length=150, verbose_name='Comentário', null=True)
@@ -128,8 +128,8 @@ class Servico(models.Model):
         ('A', 'Ativo'),
         ('I', 'Inativo'),
     )
-    #usuario = models.ForeignKey(
-        #User, on_delete=CASCADE, related_name='fk_produto_user2', default=User)
+    usuario = models.ForeignKey(
+        User, on_delete=CASCADE, related_name='fk_produto_user2', default=User)
     categoria = models.ForeignKey(
         'Categoria', on_delete=CASCADE, related_name='fk_servico_categoria1', limit_choices_to={'tp_categoria': 'S'})
     tx_titulo_servico = models.CharField(
