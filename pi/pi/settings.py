@@ -133,7 +133,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #MEDIA_URL = '/anuncios/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'anuncios')
 DEFAULT_FROM_EMAIL = 'univespmogi5@hotmail.com'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # trocar console ->smtp
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' # trocar console ->smtp
 EMAIL_HOST = 'smtp.sendgrid.net' # new
 EMAIL_HOST_USER = 'apikey' # new
 EMAIL_HOST_PASSWORD = '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' # new
@@ -143,8 +143,10 @@ EMAIL_USE_SSL = False
 
 
 EMAIL_HOST = 'smtp-mail.outlook.com' # new
-EMAIL_HOST_USER = 'nilton.uekita@hotmail.com' # new
-EMAIL_HOST_PASSWORD = 'xxxx'
+EMAIL_HOST_USER = 'mogiunivesp5@hotmail.com' # new
+EMAIL_HOST_PASSWORD = 'quinteto5'
+
+
 EMAIL_PORT = 587 # new
 EMAIL_USE_TLS = True # new
 EMAIL_USE_SSL = False

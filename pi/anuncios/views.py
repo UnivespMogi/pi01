@@ -65,9 +65,9 @@ def faleConosco(request):
 
             try:
                 # send_mail ( subject , message )
-                assunto = 'Teste: Mensagem do site condominio: ' + assunto
-                mensagem = 'nome:' + nome +'\nemail:' + seu_email + '\nCorpo: ' + mensagem
-                send_mail(assunto , mensagem, 'nilton.uekita@hotmail.com', ['univespmogi5@hotmail.com'])
+                assunto = 'Teste (Fale conosco): '+ assunto
+                mensagem = 'Nome:' + nome +'\nEmail:' + seu_email + '\nMensagem: ' + mensagem
+                send_mail(assunto , mensagem, 'mogiunivesp5@hotmail.com', ['2005436@aluno.univesp.br','2011457@aluno.univesp.br' ])
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return redirect ('Sucesso_envio_email')

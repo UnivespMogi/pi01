@@ -8,7 +8,7 @@ from django.utils import timezone
 import os
 from uuid import uuid4
 
-# renomear o arquivo caso tenha no diretorio imagens
+# renomear o arquivo de imagem caso tenha nome igual no diretorio
 def path_and_rename(instance, filename):
     upload_to = 'static\imagens'
     ext = filename.split('.')[-1]
