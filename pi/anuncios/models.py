@@ -87,6 +87,9 @@ class Contato(models.Model):
         ('WhatsApp', 'WhatsApp'),
         ('Telegram', 'Telegram'),
         ('E-Mail', 'E-Mail'),
+        ('Instagram', 'Instagram'),
+        ('Facebook', 'Facebook'),
+        ('Twitter', 'Twitter')
     )
     condominios = models.ForeignKey(
         'Condominio', on_delete=CASCADE, related_name='fk_contato_condominio1', null=True, editable=False)

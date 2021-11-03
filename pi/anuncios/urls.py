@@ -12,6 +12,7 @@ urlpatterns = [
     path('detalhes_produto_carrossel/', views.detalhesProdutoCarrossel, name = 'detalhes_produto_carrossel'),  
     path('detalhes_servico/<int:id>/', views.detalhesServico, name = 'detalhes_servico'),  
     path('politica_privacidade/', views.politicaPrivacidade, name = 'politica_privacidade'),  
+    path('Sucesso_envio_email/', views.Sucesso_envio_email, name='Sucesso_envio_email'),
 
 
     path('fale_conosco/', views.faleConosco, name = 'fale_conosco'),  

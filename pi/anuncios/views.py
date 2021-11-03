@@ -1,7 +1,10 @@
 from django.contrib.auth.models import User
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Categoria, Produto, Servico, Contato
 from random import shuffle
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse, HttpResponseRedirect
+from .apps import ContactForm
 
 def index(request):
     return render(request, 'anuncios/index.html')
@@ -18,12 +21,12 @@ def listaProdutos(request,id):
     produtos = list(Produto.objects.filter(categoria=id,st_produto='A'))
     shuffle(produtos)
     categoria = Categoria.objects.get(id=id)
-    print(produtos)
     return render(request, 'anuncios/lista_produtos.html', {'produtos': produtos,'categoria':categoria})
 
 
 def listaServicos(request,id):
-    servicos = Servico.objects.filter(categoria=id,st_servico='A')
+    servicos = list(Servico.objects.filter(categoria=id,st_servico='A'))
+    shuffle(servicos)
     categoria = Categoria.objects.get(id=id)
     return render(request, 'anuncios/lista_servicos.html', {'servicos': servicos,'categoria':categoria})
 
@@ -48,7 +51,29 @@ def politicaPrivacidade(request):
     return render(request, 'anuncios/politica_privacidade.html')
 
 def faleConosco(request):
-    return render(request, 'anuncios/fale_conosco.html')
+    if request.method == 'GET':
+        
+        form = ContactForm()
+    else:
+        form = ContactForm(request.POST)
+
+        if form.is_valid():
+            assunto = form.cleaned_data['assunto']
+            seu_email = form.cleaned_data['seu_email']
+            mensagem = form.cleaned_data['mensagem']
+
+            try:
+                # send_mail ( subject , message )
+                assunto = 'Teste: Mensagem do site condominio: ' + assunto
+                mensagem = 'email:' + seu_email + '\nCorpo: ' + mensagem
+                send_mail(assunto , mensagem, 'nilton.uekita@hotmail.com', ['univespmogi5@hotmail.com'])
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            return redirect ('Sucesso_envio_email')
+    return render(request, 'anuncios/fale_conosco.html', {'form': form})
+
+def Sucesso_envio_email(request):
+    return HttpResponse('Sucesso! Obrigado pela sua mensagem!')
 
 def perguntasRespostas(request):
     return render(request, 'anuncios/perguntas_respostas.html')

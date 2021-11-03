@@ -85,6 +85,20 @@
                                <br> <i class="fas fa-envelope fa-2x"></i> 
                             {% endifequal %}
 
+                            
+                            {% ifequal contato.tp_contato "Instagram" %}        
+                            <br> <i class="fab fa-instagram fa-2x"></i> 
+                            {% endifequal %}
+
+                            {% ifequal contato.tp_contato "Facebook" %}        
+                            <br> <i class="fab fa-facebook fa-2x"></i> 
+                            {% endifequal %}
+
+                            {% ifequal contato.tp_contato "Twitter" %}        
+                            <br> <i class="fab fa-twitter fa-2x"></i> 
+                            {% endifequal %}
+
+
                            {{contato.tx_contato}}
 
                            {% endfor %}
