@@ -22,4 +22,6 @@ urlpatterns = [
     path('como_anunciar/', views.comoAnunciar, name = 'como_anunciar'),  
     path('politica_cookies/', views.politicaCookies, name = 'politica_cookies'),  
     path('termos_uso/', views.termosUso, name = 'termos_uso'),  
+
+    path('pesquisa/', views.pesquisa, name = 'pesquisa'),
 ]

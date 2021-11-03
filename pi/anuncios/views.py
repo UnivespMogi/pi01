@@ -1,10 +1,13 @@
 from django.contrib.auth.models import User
+from django.core import paginator
 from django.shortcuts import render, redirect
 from .models import Categoria, Produto, Servico, Contato
 from random import shuffle
 from django.core.mail import send_mail, BadHeaderError
+from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseRedirect
 from .apps import ContactForm
+from django.db.models import Q
 
 def index(request):
     return render(request, 'anuncios/index.html')
@@ -91,3 +94,25 @@ def politicaCookies(request):
 
 def termosUso(request):
     return render(request, 'anuncios/termos_uso.html')
+
+def pesquisa(request):
+    #produtos = list(Produto.objects.filter(categoria=id,st_produto='A'))
+    search = request.GET.get('search')
+
+    if search:
+        p1 = list(Produto.objects.filter(Q(nm_produto__contains=search) ))
+        p2 = list(Servico.objects.filter(Q(dc_servico__contains=search) ))
+        lista = p1 + p2
+        shuffle(lista)
+
+        paginator = Paginator(lista, 3)
+        page = request.GET.get('page')
+        produtos = paginator.get_page(page)
+
+
+        return render(request, 'anuncios/pesquisa.html', {'produtos': produtos})
+    else:
+        print('Não encontrado')
+    #produtos = list(Produto.objects.filter(Q(nm_produto__contains='C') ))
+    #return render(request, 'anuncios/pesquisa.html')
+
