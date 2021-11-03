@@ -16,10 +16,9 @@ STATUS_CHOICES = (
 )
 
 class ContactForm(forms.Form):
+    nome = forms.CharField(required=True)
     seu_email = forms.EmailField(required=True)
-    #assunto = forms.CharField(required=True)
     assunto = forms.ChoiceField(choices = STATUS_CHOICES, label='Assunto', initial='',widget=forms.Select(), required=True)
-    #titulo = forms.CharField(required=True)
     mensagem = forms.CharField(widget=forms.Textarea, required=True)
 
 

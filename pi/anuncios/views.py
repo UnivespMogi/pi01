@@ -58,6 +58,7 @@ def faleConosco(request):
         form = ContactForm(request.POST)
 
         if form.is_valid():
+            nome= form.cleaned_data['nome']
             assunto = form.cleaned_data['assunto']
             seu_email = form.cleaned_data['seu_email']
             mensagem = form.cleaned_data['mensagem']
@@ -65,7 +66,7 @@ def faleConosco(request):
             try:
                 # send_mail ( subject , message )
                 assunto = 'Teste: Mensagem do site condominio: ' + assunto
-                mensagem = 'email:' + seu_email + '\nCorpo: ' + mensagem
+                mensagem = 'nome:' + nome +'\nemail:' + seu_email + '\nCorpo: ' + mensagem
                 send_mail(assunto , mensagem, 'nilton.uekita@hotmail.com', ['univespmogi5@hotmail.com'])
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
@@ -73,7 +74,8 @@ def faleConosco(request):
     return render(request, 'anuncios/fale_conosco.html', {'form': form})
 
 def Sucesso_envio_email(request):
-    return HttpResponse('Sucesso! Obrigado pela sua mensagem!')
+    #return HttpResponse('Sucesso! Obrigado pela sua mensagem!')
+    return render(request, 'anuncios/envio_email_sucesso.html')
 
 def perguntasRespostas(request):
     return render(request, 'anuncios/perguntas_respostas.html')
