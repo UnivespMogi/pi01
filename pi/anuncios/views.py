@@ -113,13 +113,14 @@ def pesquisa(request):
         lista = p1 + p2
         #shuffle(lista)
 
-        paginator = Paginator(lista, 3)
-        page = request.GET.get('page')
-        anuncios = paginator.get_page(page)
-
-
-        return render(request, 'anuncios/pesquisa.html', {'anuncios': anuncios})
     else:
-        print('Não encontrado')
+        p1 = list(Produto.objects.all())
+        p2 = list(Servico.objects.all())
+        lista = p1 + p2
+
+    paginator = Paginator(lista, 3)
+    page = request.GET.get('page')
+    anuncios = paginator.get_page(page)
+    return render(request, 'anuncios/pesquisa.html', {'anuncios': anuncios})
 
 
