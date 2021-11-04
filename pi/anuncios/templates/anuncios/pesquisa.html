@@ -4,180 +4,70 @@
 {% block content %}
 {% load humanize %}
 
-<div class="section">
-	    	<div class="container">
-                <!-- Lista de Produtos -->
-                <h2>Resultado da Pesquisa</h2>            
-				<div class="row">
-					{% for produto in produtos %}
-					<div class="col-sm-4">
-						<!-- Product -->
-					
-						<div class="shop-item">
-							<!-- Product Image -->
-							<div class="image">
-								<a href="/detalhes_produto/{{produto.id}}"><img src="{{produto.imagem.url}}" alt="Item Name"></a>
-							</div>
-							<!-- Product Title -->
-							<div class="title">
-								<h3><a href="/detalhes_produto/{{produto.id}}">{{produto.nm_produto}}{{produto.dc_servico}}</a></h3>
-							</div>
-							<div class="title">
-								<h3><a href="/detalhes_produto/{{produto.id}}">{{produto.usuario}}</a></h3>
-							</div>
-							<!-- Product Price-->
-							<div class="price">
-								<span>R$ {{produto.vl_produto|floatformat:2}}</span>
-							</div>
-							<!-- Product Description-->
-							<div class="description">
-								<p>{{produto.dc_produto}}</p>
-							</div>
-							<!-- Add to Cart Button -->
-							<div class="actions">
-								<a href="/detalhes_produto/{{produto.id}}" class="btn"><i class="icon-shopping-cart icon-white"></i> Visualizar</a>
-							</div>
+	<div class="section">
+		<div class="container">
+			<!-- Lista de Produtos -->
+			<h2>Resultado da Pesquisa</h2>            
+			<div class="row">
+				{% for anuncio in anuncios %}
+				<div class="col-sm-4">
+					<!-- Product -->
+				
+					<div class="shop-item">
+						<!-- Product Image -->
+						<div class="image">
+							{% if anuncio.nm_produto %}
+								<a href="/detalhes_produto/{{anuncio.id}}"><img src="{{anuncio.imagem.url}}" alt="Item Name"></a>
+							{% else %}
+								<a href="/detalhes_servico/{{anuncio.id}}"><img src="{{anuncio.imagem.url}}" alt="Item Name"></a>
+							{% endif %}
 						</div>
-						<!-- End Product -->
-					</div>
-					{% endfor %}
-					<!--
-					<div class="col-sm-4">
-						<div class="shop-item">
-							<div class="image">
-								<a href="/detalhes_produto/"><img src="{% static 'img/product5.jpg' %}" alt="Item Name"></a>
-							</div>
-							<div class="title">
-								<h3><a href="/detalhes_produto/">Fone de Ouvido</a></h3>
-							</div>
-							<div class="price">
-								R$ 35,00
-							</div>
-							<div class="description">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mattis, nulla id pretium malesuada, dui est laoreet risus, ac rhoncus eros diam id odio.</p>
-							</div>
-							<div class="actions">
-								<a href="page-product-details.html" class="btn"><i class="icon-shopping-cart icon-white"></i> Visualizar</a>
-							</div>
+						<!-- Product Title -->
+						<div class="title">
+							
+							{% if anuncio.nm_produto %}
+								<h3><a href="/detalhes_produto/{{anuncio.id}}">{{anuncio.nm_produto}}</a></h3>
+							{% else %}
+								<h3><a href="/detalhes_servico/{{anuncio.id}}">{{anuncio.tx_titulo_servico}}</a></h3>
+							{% endif %}
+						</div>
+						<div class="title">
+							<h3><a href="/detalhes_produto/{{produto.id}}">{{produto.usuario}}</a></h3>
+						</div>
+						<!-- Add to Cart Button -->
+						<div class="actions">
+							<a href="/detalhes_produto/{{produto.id}}" class="btn"><i class="icon-shopping-cart icon-white"></i> Visualizar</a>
 						</div>
 					</div>
-					
-					<div class="col-sm-4">
-						<div class="shop-item">
-							<div class="image">
-								<a href="/detalhes_produto/"><img src="{% static 'img/fotos/celulares/s7_edge_pexels-mohi-syed-50614.jpg' %}" alt="Item Name"></a>
-							</div>
-							<div class="title">
-								<h3><a href="/detalhes_produto/">Celular Samsung S7 Edge</a></h3>
-							</div>
-							<div class="price">
-								R$ A COMBINAR
-							</div>
-							<div class="description">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mattis, nulla id pretium malesuada, dui est laoreet risus, ac rhoncus eros diam id odio.</p>
-							</div>
-							<div class="actions">
-								<a href="page-product-details.html" class="btn"><i class="icon-shopping-cart icon-white"></i>Visualizar</a>
-							</div>
-						</div>
-					</div>
+					<!-- End Product -->
 				</div>
-				<div class="row">
-					<div class="col-sm-4">
-						<div class="shop-item">
-							<div class="image">
-								<a href="/detalhes_produto/"><img src="{% static 'img/product4.jpg' %}" alt="Item Name"></a>
-							</div>
-							<div class="title">
-								<h3><a href="/detalhes_produto/">Lorem ipsum dolor</a></h3>
-							</div>
-							<div class="colors">
-								<span class="color-white"></span>
-								<span class="color-black"></span>
-								<span class="color-blue"></span>
-							</div>
-							<div class="price">
-								$999.99
-							</div>
-							<div class="description">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mattis, nulla id pretium malesuada, dui est laoreet risus, ac rhoncus eros diam id odio.</p>
-							</div>
-							<div class="actions">
-								<a href="page-product-details.html" class="btn"><i class="icon-shopping-cart icon-white"></i> Add to Cart</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="shop-item">
-							<div class="image">
-								<a href="/detalhes_produto/"><img src="{% static 'img/product5.jpg' %}" alt="Item Name"></a>
-							</div>
-							<div class="title">
-								<h3><a href="/detalhes_produto/">Lorem ipsum dolor</a></h3>
-							</div>
-							<div class="colors">
-								<span class="color-white"></span>
-								<span class="color-black"></span>
-								<span class="color-blue"></span>
-							</div>
-							<div class="price">
-								$999.99
-							</div>
-							<div class="description">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mattis, nulla id pretium malesuada, dui est laoreet risus, ac rhoncus eros diam id odio.</p>
-							</div>
-							<div class="actions">
-								<a href="page-product-details.html" class="btn"><i class="icon-shopping-cart icon-white"></i> Add to Cart</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="shop-item">
-							<div class="image">
-								<a href="/detalhes_produto/"><img src="{% static 'img/product6.jpg' %}" alt="Item Name"></a>
-							</div>
-							<div class="title">
-								<h3><a href="/detalhes_produto/">Lorem ipsum dolor</a></h3>
-							</div>
-							<div class="colors">
-								<span class="color-white"></span>
-								<span class="color-black"></span>
-							</div>
-							<div class="price">
-								$999.99
-							</div>
-							<div class="description">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mattis, nulla id pretium malesuada, dui est laoreet risus, ac rhoncus eros diam id odio.</p>
-							</div>
-							<div class="actions">
-								<a href="page-product-details.html" class="btn"><i class="icon-shopping-cart icon-white"></i> Add to Cart</a>
-							</div>
-						</div>
-					</div>
-				</div>-->
-				<!-- Paginação -->
+				{% endfor %}
+				<!--
+			<!-- Paginação -->
+			<div class="container">
 				<nav aria-label="Page navigation example">
 					<ul class="pagination">
-						{% if produtos.has_previous %}
-							<li class="page-item"><a class="page-link" href="?page={{ produtos.previous_page_number }}">&laquo;</a></li>
+						{% if anuncios.has_previous %}
+							<li class="page-item"><a class="page-link" href="?search={{ request.GET.search }}&page={{ anuncios.previous_page_number }}">&laquo;</a></li>
 						{% else %}
 							<li class="page-item" class="disabled"><span class="page-link">&laquo;</span></li>
 						{% endif %}
-						{% for i in produtos.paginator.page_range %}
-							{% if produtos.number == i %}
+						{% for i in anuncios.paginator.page_range %}
+							{% if anuncios.number == i %}
 							<li class="page-item" class="active"><span class="page-link" >{{ i }} <span class="sr-only">(current)</span></span></li>
 							{% else %}
-							<li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+							<li class="page-item"><a class="page-link" href="?search={{ request.GET.search }}&page={{ i }}">{{ i }}</a></li>
 							{% endif %}
 						{% endfor %}
-						{% if produtos.has_next %}
-							<li class="page-item"><a class="page-link" href="?page={{ produtos.next_page_number }}">&raquo;</a></li>
+						{% if anuncios.has_next %}
+							<li class="page-item"><a class="page-link" href="?search={{ request.GET.search }}&page={{ anuncios.next_page_number }}">&raquo;</a></li>
 						{% else %}
-							<li class="page-item" class="disabled"><span>&raquo;</span></li>
+							<li class="page-item" class="disabled"><span class="page-link">&raquo;</span></li>
 						{% endif %}
 					</ul>
 				</nav>
 			</div>
-	    </div>
+		</div>
+	</div>
 
 {% endblock %}

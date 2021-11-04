@@ -3,54 +3,23 @@
 {% block menu_servicos %}active{% endblock %}
 {% block content %}
 
-       <div class="section">
-	        <div class="container">
-                <!-- Título da categoria -->
-                <h2>Categoria de Serviços</h2>
-	        	<div class="row">
-					{% for categoria in categorias %}
-	        		<div class="col-md-2 col-sm-6">
-	        			<div class="service-wrapper">
-                            <a href="/lista_servicos/{{categoria.id}}">
-							<i class="{{categoria.nm_icone}}"></i>
-		        			<h3>{{categoria.nm_categoria}}</h3>
-							</a>
-	        			</div>
-	        		</div>
-					{% endfor %}
-					<!--
-	        		<div class="col-md-2 col-sm-6">
-	        			<div class="service-wrapper">
-                            <i class="fas fa-satellite-dish fa-3x"></i>
-		        			<h3>Assistência Técnica</h3>
-	        			</div>
-	        		</div>
-	        		<div class="col-md-2 col-sm-6">
-	        			<div class="service-wrapper">
-                            <i class="fas fa-broom fa-3x"></i>
-		        			<h3>Serviços Domésticos</h3>
-	        			</div>
-	        		</div>    
-	        		<div class="col-md-2 col-sm-6">
-	        			<div class="service-wrapper">
-                            <i class="fas fa-image fa-3x"></i>
-		        			<h3>Design e Tecnologia</h3>
-	        			</div>
-	        		</div>
-	        		<div class="col-md-2 col-sm-6">
-	        			<div class="service-wrapper">
-                            <i class="fas fa-graduation-cap fa-3x"></i>
-		        			<h3>Aulas e Treinamentos</h3>
-	        			</div>
-	        		</div>
-	        		<div class="col-md-2 col-sm-6">
-	        			<div class="service-wrapper">
-                            <i class="fas fa-glass-cheers fa-3x"></i>
-		        			<h3>Eventos e Festas</h3>
-	        			</div>
-	        		</div>-->
-	        	</div>
-	        </div>
+	<div class="section">
+		<div class="container">
+			<!-- Título da categoria -->
+			<h2>Categoria de Serviços</h2>
+			<div class="row">
+				{% for categoria in categorias %}
+				<div class="col-md-2 col-sm-6">
+					<div class="service-wrapper">
+						<a href="/lista_servicos/{{categoria.id}}">
+						<i class="{{categoria.nm_icone}}"></i>
+						<h3>{{categoria.nm_categoria}}</h3>
+						</a>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
 	    </div>
+	</div>
 
 {% endblock %}

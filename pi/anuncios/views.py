@@ -21,16 +21,25 @@ def servicos(request):
     return render(request, 'anuncios/servicos.html', {'categorias': categorias})
 
 def listaProdutos(request,id):
-    produtos = list(Produto.objects.filter(categoria=id,st_produto='A'))
-    shuffle(produtos)
+    produtos = list(Produto.objects.filter(categoria=id,st_produto='A').order_by('dt_cadastro'))
+    #shuffle(produtos)
     categoria = Categoria.objects.get(id=id)
-    return render(request, 'anuncios/lista_produtos.html', {'produtos': produtos,'categoria':categoria})
 
+    paginator = Paginator(produtos, 3)
+    page = request.GET.get('page')
+    produtos = paginator.get_page(page)
+
+    return render(request, 'anuncios/lista_produtos.html', {'produtos': produtos,'categoria':categoria})
 
 def listaServicos(request,id):
     servicos = list(Servico.objects.filter(categoria=id,st_servico='A'))
-    shuffle(servicos)
+    #shuffle(servicos)
     categoria = Categoria.objects.get(id=id)
+
+    paginator = Paginator(servicos, 3)
+    page = request.GET.get('page')
+    servicos = paginator.get_page(page)
+
     return render(request, 'anuncios/lista_servicos.html', {'servicos': servicos,'categoria':categoria})
 
 def detalhesProduto(request  ,id ):
@@ -96,23 +105,21 @@ def termosUso(request):
     return render(request, 'anuncios/termos_uso.html')
 
 def pesquisa(request):
-    #produtos = list(Produto.objects.filter(categoria=id,st_produto='A'))
     search = request.GET.get('search')
 
     if search:
         p1 = list(Produto.objects.filter(Q(nm_produto__contains=search) ))
         p2 = list(Servico.objects.filter(Q(dc_servico__contains=search) ))
         lista = p1 + p2
-        shuffle(lista)
+        #shuffle(lista)
 
         paginator = Paginator(lista, 3)
         page = request.GET.get('page')
-        produtos = paginator.get_page(page)
+        anuncios = paginator.get_page(page)
 
 
-        return render(request, 'anuncios/pesquisa.html', {'produtos': produtos})
+        return render(request, 'anuncios/pesquisa.html', {'anuncios': anuncios})
     else:
         print('Não encontrado')
-    #produtos = list(Produto.objects.filter(Q(nm_produto__contains='C') ))
-    #return render(request, 'anuncios/pesquisa.html')
+
 

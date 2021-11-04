@@ -3,184 +3,52 @@
 {% block menu_servicos %}active{% endblock %}
 {% block content %}
 
-<div class="section">
-	    	<div class="container">
-                <!-- Lista de Produtos -->
-                <h2>{{categoria.nm_categoria}}</h2>            
-				<div class="row">
-					{% for servico in servicos %}
-					<div class="col-sm-4">
-						<!-- Product -->
-						<div class="shop-item">
-							<!-- Product Image -->
-							<div class="image">
-								<a href="/detalhes_servico/{{servico.id}}"><img src="{{servico.imagem.url}}" alt="Item Name"></a>
-							</div>
-							<!-- Product Title -->
-							<div class="title">
-								<h3>{{servico.usuario}}</h3>
-							</div>
-							<div class="title">
-								<h3><a href="/detalhes_servico/{{servico.id}}">{{servico.tx_titulo_servico }}</a></h3>
-							</div>
-							<!-- Product Available Colors-->
-							<div class="colors">
-								<span class="color-white"></span>
-								<span class="color-black"></span>
-								<span class="color-blue"></span>
-								<span class="color-orange"></span>
-								<span class="color-green"></span>
-							</div>
-							<!-- Product Price-->
-							<!-- Product Description-->
-							<div class="description">
-								<p>{{servico.dc_servico}}</p>
-							</div>
+	<div class="section">
+		<div class="container">
+			<!-- Lista de Produtos -->
+			<h2>{{categoria.nm_categoria}}</h2>            
+			<div class="row">
+				{% for servico in servicos %}
+				<div class="col-sm-4">
+					<!-- Product -->
+					<div class="shop-item">
+						<!-- Product Image -->
+						<div class="image">
+							<a href="/detalhes_servico/{{servico.id}}"><img src="{{servico.imagem.url}}" alt="Item Name"></a>
 						</div>
-						<!-- End Product -->
-					</div>
-					{% endfor %}
-					<!--
-					
-					<div class="col-sm-4">
-						<div class="shop-item">
-							<div class="image">
-								<a href="/detalhes_servico/"><img src="{% static 'img/product2.jpg' %}" alt="Item Name"></a>
-							</div>
-							<div class="title">
-								<h3><a href="/detalhes_servico/">Lorem ipsum dolor</a></h3>
-							</div>
-							<div class="colors">
-								<span class="color-white"></span>
-								<span class="color-black"></span>
-							</div>
-							<div class="price">
-								$999.99
-							</div>
-							<div class="description">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mattis, nulla id pretium malesuada, dui est laoreet risus, ac rhoncus eros diam id odio.</p>
-							</div>
-							<div class="actions">
-								<a href="page-product-details.html" class="btn"><i class="icon-shopping-cart icon-white"></i> Add to Cart</a>
-							</div>
+						<div class="title">
+							<h3><a href="/detalhes_servico/{{servico.id}}">{{servico.tx_titulo_servico }}</a></h3>
 						</div>
 					</div>
-					<div class="col-sm-4">
-						<div class="shop-item">
-							<div class="image">
-								<a href="/detalhes_servico/"><img src="{% static 'img/product3.jpg' %}" alt="Item Name"></a>
-							</div>
-							<div class="title">
-								<h3><a href="/detalhes_servico/">Lorem ipsum dolor</a></h3>
-							</div>
-							<div class="colors">
-								<span class="color-white"></span>
-								<span class="color-black"></span>
-								<span class="color-blue"></span>
-							</div>
-							<div class="price">
-								$999.99
-							</div>
-							<div class="description">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mattis, nulla id pretium malesuada, dui est laoreet risus, ac rhoncus eros diam id odio.</p>
-							</div>
-							<div class="actions">
-								<a href="page-product-details.html" class="btn"><i class="icon-shopping-cart icon-white"></i> Add to Cart</a>
-							</div>
-						</div>
-					</div>
+					<!-- End Product -->
 				</div>
-				<div class="row">
-					<div class="col-sm-4">
-						<div class="shop-item">
-							<div class="image">
-								<a href="/detalhes_servico/"><img src="{% static 'img/product4.jpg' %}" alt="Item Name"></a>
-							</div>
-							<div class="title">
-								<h3><a href="/detalhes_servico/">Lorem ipsum dolor</a></h3>
-							</div>
-							<div class="colors">
-								<span class="color-white"></span>
-								<span class="color-black"></span>
-								<span class="color-blue"></span>
-							</div>
-							<div class="price">
-								$999.99
-							</div>
-							<div class="description">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mattis, nulla id pretium malesuada, dui est laoreet risus, ac rhoncus eros diam id odio.</p>
-							</div>
-							<div class="actions">
-								<a href="page-product-details.html" class="btn"><i class="icon-shopping-cart icon-white"></i> Add to Cart</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="shop-item">
-							<div class="image">
-								<a href="/detalhes_servico/"><img src="{% static 'img/product5.jpg' %}" alt="Item Name"></a>
-							</div>
-							<div class="title">
-								<h3><a href="/detalhes_servico/">Lorem ipsum dolor</a></h3>
-							</div>
-							<div class="colors">
-								<span class="color-white"></span>
-								<span class="color-black"></span>
-								<span class="color-blue"></span>
-							</div>
-							<div class="price">
-								$999.99
-							</div>
-							<div class="description">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mattis, nulla id pretium malesuada, dui est laoreet risus, ac rhoncus eros diam id odio.</p>
-							</div>
-							<div class="actions">
-								<a href="page-product-details.html" class="btn"><i class="icon-shopping-cart icon-white"></i> Add to Cart</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="shop-item">
-							<div class="image">
-								<a href="/detalhes_servico/"><img src="{% static 'img/product6.jpg' %}" alt="Item Name"></a>
-							</div>
-							<div class="title">
-								<h3><a href="/detalhes_servico/">Lorem ipsum dolor</a></h3>
-							</div>
-							<div class="colors">
-								<span class="color-white"></span>
-								<span class="color-black"></span>
-							</div>
-							<div class="price">
-								$999.99
-							</div>
-							<div class="description">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mattis, nulla id pretium malesuada, dui est laoreet risus, ac rhoncus eros diam id odio.</p>
-							</div>
-							<div class="actions">
-								<a href="page-product-details.html" class="btn"><i class="icon-shopping-cart icon-white"></i> Add to Cart</a>
-							</div>
-						</div>
-					</div>-->
+				{% endfor %}
+
+				<div class="container">
+					<nav aria-label="Page navigation example">
+						<ul class="pagination">
+							{% if servicos.has_previous %}
+								<li class="page-item"><a class="page-link" href="?page={{ servicos.previous_page_number }}">&laquo;</a></li>
+							{% else %}
+								<li class="page-item" class="disabled"><span class="page-link">&laquo;</span></li>
+							{% endif %}
+							{% for i in servicos.paginator.page_range %}
+								{% if servicos.number == i %}
+								<li class="page-item" class="active"><span class="page-link" >{{ i }} <span class="sr-only">(current)</span></span></li>
+								{% else %}
+								<li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+								{% endif %}
+							{% endfor %}
+							{% if servicos.has_next %}
+								<li class="page-item"><a class="page-link" href="?page={{ servicos.next_page_number }}">&raquo;</a></li>
+							{% else %}
+								<li class="page-item" class="disabled"><span class="page-link">&raquo;</span></li>
+							{% endif %}
+						</ul>
+					</nav>
 				</div>
-				<nav aria-label="Page navigation example">
-					<ul class="pagination">
-						<li class="page-item">
-							<a class="page-link" href="#" aria-label="Previous">
-								<span aria-hidden="true">&laquo;</span>
-							</a>
-						</li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item">
-							<a class="page-link" href="#" aria-label="Next">
-								<span aria-hidden="true">&raquo;</span>
-							</a>
-						</li>
-					</ul>
-				</nav>
 			</div>
-	    </div>
+		</div>
+	</div>
 
 {% endblock %}

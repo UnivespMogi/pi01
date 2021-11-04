@@ -4,7 +4,7 @@
 {% block content %}
 {% load humanize %}
 
-<div class="section">
+	<div class="section">
 	    	<div class="container">
                 <!-- Lista de Produtos -->
                 <h2>{{categoria.nm_categoria}}</h2>            
@@ -22,16 +22,9 @@
 							<div class="title">
 								<h3><a href="/detalhes_produto/{{produto.id}}">{{produto.nm_produto}}</a></h3>
 							</div>
-							<div class="title">
-								<h3><a href="/detalhes_produto/{{produto.id}}">{{produto.usuario}}</a></h3>
-							</div>
 							<!-- Product Price-->
 							<div class="price">
 								<span>R$ {{produto.vl_produto|floatformat:2}}</span>
-							</div>
-							<!-- Product Description-->
-							<div class="description">
-								<p>{{produto.dc_produto}}</p>
 							</div>
 							<!-- Add to Cart Button -->
 							<div class="actions">
@@ -42,138 +35,31 @@
 					</div>
 					{% endfor %}
 					<!--
-					<div class="col-sm-4">
-						<div class="shop-item">
-							<div class="image">
-								<a href="/detalhes_produto/"><img src="{% static 'img/product5.jpg' %}" alt="Item Name"></a>
-							</div>
-							<div class="title">
-								<h3><a href="/detalhes_produto/">Fone de Ouvido</a></h3>
-							</div>
-							<div class="price">
-								R$ 35,00
-							</div>
-							<div class="description">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mattis, nulla id pretium malesuada, dui est laoreet risus, ac rhoncus eros diam id odio.</p>
-							</div>
-							<div class="actions">
-								<a href="page-product-details.html" class="btn"><i class="icon-shopping-cart icon-white"></i> Visualizar</a>
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-sm-4">
-						<div class="shop-item">
-							<div class="image">
-								<a href="/detalhes_produto/"><img src="{% static 'img/fotos/celulares/s7_edge_pexels-mohi-syed-50614.jpg' %}" alt="Item Name"></a>
-							</div>
-							<div class="title">
-								<h3><a href="/detalhes_produto/">Celular Samsung S7 Edge</a></h3>
-							</div>
-							<div class="price">
-								R$ A COMBINAR
-							</div>
-							<div class="description">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mattis, nulla id pretium malesuada, dui est laoreet risus, ac rhoncus eros diam id odio.</p>
-							</div>
-							<div class="actions">
-								<a href="page-product-details.html" class="btn"><i class="icon-shopping-cart icon-white"></i>Visualizar</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-4">
-						<div class="shop-item">
-							<div class="image">
-								<a href="/detalhes_produto/"><img src="{% static 'img/product4.jpg' %}" alt="Item Name"></a>
-							</div>
-							<div class="title">
-								<h3><a href="/detalhes_produto/">Lorem ipsum dolor</a></h3>
-							</div>
-							<div class="colors">
-								<span class="color-white"></span>
-								<span class="color-black"></span>
-								<span class="color-blue"></span>
-							</div>
-							<div class="price">
-								$999.99
-							</div>
-							<div class="description">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mattis, nulla id pretium malesuada, dui est laoreet risus, ac rhoncus eros diam id odio.</p>
-							</div>
-							<div class="actions">
-								<a href="page-product-details.html" class="btn"><i class="icon-shopping-cart icon-white"></i> Add to Cart</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="shop-item">
-							<div class="image">
-								<a href="/detalhes_produto/"><img src="{% static 'img/product5.jpg' %}" alt="Item Name"></a>
-							</div>
-							<div class="title">
-								<h3><a href="/detalhes_produto/">Lorem ipsum dolor</a></h3>
-							</div>
-							<div class="colors">
-								<span class="color-white"></span>
-								<span class="color-black"></span>
-								<span class="color-blue"></span>
-							</div>
-							<div class="price">
-								$999.99
-							</div>
-							<div class="description">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mattis, nulla id pretium malesuada, dui est laoreet risus, ac rhoncus eros diam id odio.</p>
-							</div>
-							<div class="actions">
-								<a href="page-product-details.html" class="btn"><i class="icon-shopping-cart icon-white"></i> Add to Cart</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="shop-item">
-							<div class="image">
-								<a href="/detalhes_produto/"><img src="{% static 'img/product6.jpg' %}" alt="Item Name"></a>
-							</div>
-							<div class="title">
-								<h3><a href="/detalhes_produto/">Lorem ipsum dolor</a></h3>
-							</div>
-							<div class="colors">
-								<span class="color-white"></span>
-								<span class="color-black"></span>
-							</div>
-							<div class="price">
-								$999.99
-							</div>
-							<div class="description">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mattis, nulla id pretium malesuada, dui est laoreet risus, ac rhoncus eros diam id odio.</p>
-							</div>
-							<div class="actions">
-								<a href="page-product-details.html" class="btn"><i class="icon-shopping-cart icon-white"></i> Add to Cart</a>
-							</div>
-						</div>
-					</div>
-				</div>-->
-				<!-- Paginação -->
+			<!-- Paginação -->
+			<div class="container">
 				<nav aria-label="Page navigation example">
 					<ul class="pagination">
-						<li class="page-item">
-							<a class="page-link" href="#" aria-label="Previous">
-								<span aria-hidden="true">&laquo;</span>
-							</a>
-						</li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item">
-							<a class="page-link" href="#" aria-label="Next">
-								<span aria-hidden="true">&raquo;</span>
-							</a>
-						</li>
+						{% if produtos.has_previous %}
+							<li class="page-item"><a class="page-link" href="?page={{ produtos.previous_page_number }}">&laquo;</a></li>
+						{% else %}
+							<li class="page-item" class="disabled"><span class="page-link">&laquo;</span></li>
+						{% endif %}
+						{% for i in produtos.paginator.page_range %}
+							{% if produtos.number == i %}
+							<li class="page-item" class="active"><span class="page-link" >{{ i }} <span class="sr-only">(current)</span></span></li>
+							{% else %}
+							<li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+							{% endif %}
+						{% endfor %}
+						{% if produtos.has_next %}
+							<li class="page-item"><a class="page-link" href="?page={{ produtos.next_page_number }}">&raquo;</a></li>
+						{% else %}
+							<li class="page-item" class="disabled"><span class="page-link">&raquo;</span></li>
+						{% endif %}
 					</ul>
 				</nav>
 			</div>
-	    </div>
+		</div>
+	</div>
 
 {% endblock %}
