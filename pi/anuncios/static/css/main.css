@@ -79,6 +79,17 @@ h1 {
   font-weight: 800;
   font-size: clamp(0.9em, 1em + 1vw, 0.8em);
 }
+h1m{
+  color: #53555c;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 800;
+  font-size: clamp(0.9em, 1em + 1vw, 0.8em);
+  text-align: center;
+
+}
+
+
+
 h2 {
   color: #53555c;
   font-family: 'Open Sans', sans-serif;

@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 urlpatterns = [
@@ -17,11 +17,18 @@ urlpatterns = [
 
     path('fale_conosco/', views.faleConosco, name = 'fale_conosco'),  
     path('perguntas_respostas/', views.perguntasRespostas, name = 'perguntas_respostas'),  
-    path('login/', views.login, name = 'login'),  
+    #path('login/', views.login, name = 'login'),  
+
 
     path('como_anunciar/', views.comoAnunciar, name = 'como_anunciar'),  
     path('politica_cookies/', views.politicaCookies, name = 'politica_cookies'),  
     path('termos_uso/', views.termosUso, name = 'termos_uso'),  
 
     path('pesquisa/', views.pesquisa, name = 'pesquisa'),
+
+]
+
+
+urlpatterns += [
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
