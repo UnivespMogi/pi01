@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -150,3 +151,6 @@ EMAIL_HOST_PASSWORD = 'quinteto5'
 EMAIL_PORT = 587 # new
 EMAIL_USE_TLS = True # new
 EMAIL_USE_SSL = False
+
+LOGIN_REDIRECT_URL = '/'
+

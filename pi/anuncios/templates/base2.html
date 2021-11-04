@@ -34,37 +34,6 @@
         <div class="container">
 
 
-
-
-            <div class="menuextras">
-                <div class="extras">
-                    <ul>
-                        {% if user.is_authenticated %}
-                            <li><i class="fas fa-user"></i>
-                            Usuario: {{ user.get_username }}</li>
-                            <a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
-
-                            <a href="{% url 'logout'%}?next={{request.path}}">Area do usuario</a>
-                        
-                        </li>
-                        {% else %}
-
-
-
-                        <li>
-                            <i class="fas fa-user"></i>
-                            <a href="{% url 'login'%}?next={{request.path}}">Login</a>
-                        </li>
-
-                        {% endif %} 
-                    </ul>
-                </div>
-            </div>
-
-
-
-
-
             <nav class="navbar navbar-expand-lg navbar-light">
                 <a class="navbar-brand" href="/"><h1><img src="{% static 'img/logo.png' %}" alt="Multipurpose Twitter Bootstrap Template">Negocia aí, vizinho!</h1></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -96,17 +65,7 @@
                 <div class="col-md-12">
                     <p style="color: white; text-align: center;">Negocie produtos e serviços com seus vizinhos</p>
                 </div>
-                <div class="col-md-12">
-                    <div class="input-group">
-                        <form action="/pesquisa" method="GET" id="search-form" class="input-group">
-                            <input class="form-control" type="text" id="search" name="search" placeholder="Digite um produto ou serviço para pesquisar" value="{{ request.GET.search}}">
-                            <span class="input-group-btn">
-                                <button id="search-btn" class="btn">Pesquisar</button> 
-                            </span>
-                        </form>
-                    </div>
-                    <br />
-                </div>
+                
             </div>
         </div>
     </div>
