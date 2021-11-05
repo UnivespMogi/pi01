@@ -74,7 +74,11 @@
                             {% endifequal %}
                  
                             {% ifequal contato.tp_contato "WhatsApp" %}        
-                               <br> <i class="fab fa-whatsapp fa-2x"></i> 
+                               <br>
+                                <button class="btn" onclick="enviarMensagem({{contato.tx_contato}},'Olá, Tudo bem?\nEstou interessando no produto:\n*{{produto.nm_produto}}*\n{{produto.dc_produto}}')">
+                                    <i class="fab fa-whatsapp fa-2x"></i>
+                                    
+                                </button>
                             {% endifequal %}
 
                             {% ifequal contato.tp_contato "Telegram" %}        
@@ -103,8 +107,6 @@
 
                            {% endfor %}
                             </Strong>
-
-
                             <!-- 
                                 <i class="fab fa-instagram fa-2x"></i> 
                                 <i class="fab fa-facebook fa-2x"></i> 

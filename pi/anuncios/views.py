@@ -45,7 +45,8 @@ def listaServicos(request,id):
 def detalhesProduto(request  ,id ):
     produto = Produto.objects.get(id=id)
     contatos = Contato.objects.filter(usuario = produto.usuario)
-    return render(request, 'anuncios/detalhes_produto.html', {'produto': produto,'contatos' : contatos})
+    mensagem = 'Oi, me interesse pelo seu Produto\nGostaria que verificar o valor.\nPodemos conversar'
+    return render(request, 'anuncios/detalhes_produto.html', {'produto': produto,'contatos' : contatos, 'mensagem': mensagem})
 
 def detalhesProdutoOriginal(request):
     return render(request, 'anuncios/detalhes_produto_original.html')
