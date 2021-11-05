@@ -2688,3 +2688,21 @@ span.text-color-orange {
 .dropdown.open a.dropdown-toggle .caret {
   border-top: 4px solid #FFF;
 }
+
+
+.task-list {
+  padding-left: 0;
+}
+
+.task-item {
+  list-style: none;
+  font-size: 20px;
+  height: 50px;
+  padding: 0 15px;
+  padding-top: 10px;
+  border-bottom: 1px dashed #CCC;
+}
+
+.task-item.done {
+  background-color: #CCC;
+}  

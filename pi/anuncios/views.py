@@ -1,13 +1,20 @@
 from django.contrib.auth.models import User
 from django.core import paginator
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from .models import Categoria, Produto, Servico, Contato
 from random import shuffle
 from django.core.mail import send_mail, BadHeaderError
 from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseRedirect
-from .apps import ContactForm
+
 from django.db.models import Q
+from users.models import User
+from .forms import ContactForm
+from .forms import produto_Form
+from django.contrib import messages
+
+from django.contrib.auth.decorators import login_required
+
 
 def index(request):
     return render(request, 'anuncios/index.html')
@@ -123,4 +130,55 @@ def pesquisa(request):
     anuncios = paginator.get_page(page)
     return render(request, 'anuncios/pesquisa.html', {'anuncios': anuncios})
 
+
+def Cadastro_produto(request):
+    produtos = Produto.objects.filter(usuario=request.user)
+    return render(request, 'anuncios/Cadastro_produto.html', {'produtos': produtos})
+
+
+@login_required
+def Cadastro_servico(request):
+    servicos = Servico.objects.filter(usuario=request.user)
+    return render(request, 'anuncios/Cadastro_produto.html', {'servicos': servicos})
+
+#@login_required
+#def edit_produto(request, id):
+    #task = get_object_or_404(Task, pk=id)
+    #form = Produto_Form(instance=task)
+
+    #if(request.method == 'POST'):
+        #form = Produto_Form(request.POST, instance=task)
+
+        #if(form.is_valid()):
+            #task.save()
+            #return redirect('/')
+        #else:
+            #return render(request, 'task/edittask.html', {'form': form, 'task': task})
+    #else:
+        #return render(request, 'tasks/edittask.html', {'form': form, 'task': task})
+
+@login_required
+def produto_delete(request, id):
+    produto = get_object_or_404(Produto, pk=id)
+    #produto.delete()
+
+    messages.info(request, 'Tarefa deletada com sucesso.')
+
+    return redirect('Cadastro_produto')
+
+
+@login_required
+def produto_add(request):
+    if request.method == 'POST':
+        form = produto_Form(request.POST)
+        
+        if form.is_valid():
+            Produto = form.save(commit=False)
+            #Produto.done = 'doing'
+            Produto.usuario = request.user
+            Produto.save()
+            return redirect('/')
+    else:
+        form = produto_Form()
+        return render(request, 'anuncios/produto_add.html', {'form': form})
 

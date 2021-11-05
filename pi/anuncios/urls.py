@@ -13,7 +13,7 @@ urlpatterns = [
     path('detalhes_servico/<int:id>/', views.detalhesServico, name = 'detalhes_servico'),  
     path('politica_privacidade/', views.politicaPrivacidade, name = 'politica_privacidade'),  
     path('Sucesso_envio_email/', views.Sucesso_envio_email, name='Sucesso_envio_email'),
-
+    path('Cadastro_produto/', views.Cadastro_produto, name='Cadastro_produto'),
 
     path('fale_conosco/', views.faleConosco, name = 'fale_conosco'),  
     path('perguntas_respostas/', views.perguntasRespostas, name = 'perguntas_respostas'),  
@@ -25,6 +25,10 @@ urlpatterns = [
     path('termos_uso/', views.termosUso, name = 'termos_uso'),  
 
     path('pesquisa/', views.pesquisa, name = 'pesquisa'),
+    #path('produto_edit/<int:id>', views.produto_edit, name='produto_edit'),
+    path('produto_delete/<int:id>', views.produto_delete, name='produto_delete'),
+    path('produto_add/', views.produto_add, name='produto_add')
+
 
 ]
 
