@@ -142,21 +142,6 @@ def Cadastro_servico(request):
     servicos = Servico.objects.filter(usuario=request.user)
     return render(request, 'anuncios/Cadastro_produto.html', {'servicos': servicos})
 
-#@login_required
-#def edit_produto(request, id):
-    #task = get_object_or_404(Task, pk=id)
-    #form = Produto_Form(instance=task)
-
-    #if(request.method == 'POST'):
-        #form = Produto_Form(request.POST, instance=task)
-
-        #if(form.is_valid()):
-            #task.save()
-            #return redirect('/')
-        #else:
-            #return render(request, 'task/edittask.html', {'form': form, 'task': task})
-    #else:
-        #return render(request, 'tasks/edittask.html', {'form': form, 'task': task})
 
 
 @login_required
@@ -201,5 +186,13 @@ def produto_add(request):
         form = Produto_Form()
     context['form']=form
     return render(request, 'anuncios/produto_add.html', context)
+
+
+@login_required
+def Cadastro_contato(request):
+    contatos = Contato.objects.filter(usuario=request.user)
+    return render(request, 'anuncios/Cadastro_contato.html', {'contatos': contatos})
+
+
 
 
