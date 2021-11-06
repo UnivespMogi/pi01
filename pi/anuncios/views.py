@@ -10,7 +10,8 @@ from django.template import RequestContext
 from django.db.models import Q
 from users.models import User
 from .forms import ContactForm
-from .forms import Produto_Form
+from .forms import Produto_Form 
+from .forms import Contato_Form
 from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
@@ -194,5 +195,44 @@ def Cadastro_contato(request):
     return render(request, 'anuncios/Cadastro_contato.html', {'contatos': contatos})
 
 
+@login_required
+def contato_add(request):
+    context ={}
+    if request.method == 'POST':
+ 
+        form = Contato_Form(data=request.POST)
+        if form.is_valid():
+            Contato = form.save(commit=False)
+            Contato.usuario = request.user
+            Contato.save()
+            return redirect('Cadastro_contato')
+    else:
+        form = Contato_Form()
+    context['form']=form
+    return render(request, 'anuncios/contato_add.html', context)
 
 
+@login_required
+def contato_edit(request, id):
+    contato = get_object_or_404(Contato, pk=id)
+    form = Contato_Form(instance=contato)
+
+    if (request.method == 'POST'):
+        form = Contato_Form (data=request.POST, instance=contato)
+
+        if form.is_valid():
+            #Produto = form.save(commit=False)
+            contato.save()
+            return redirect ('Cadastro_contato')
+        else:
+            return render(request, 'contato_edit', {'form': form, 'contato': contato})
+    else:
+        return render(request, 'anuncios/contato_edit.html', {'form': form, 'contato': contato})
+
+
+@login_required
+def contato_delete(request, id):
+    contato = get_object_or_404(Contato, pk=id)
+    contato.delete()
+    #messages.info(request, 'Tarefa deletada com sucesso.')
+    return redirect('Cadastro_contato')

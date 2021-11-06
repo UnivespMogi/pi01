@@ -26,10 +26,17 @@ urlpatterns = [
     path('termos_uso/', views.termosUso, name = 'termos_uso'),  
 
     path('pesquisa/', views.pesquisa, name = 'pesquisa'),
+
+ 
+    path('contato_add/', views.contato_add, name='contato_add'),
+    path('contato_edit/<int:id>/', views.contato_edit, name='contato_edit'),
+    path('contato_delete/<int:id>', views.contato_delete, name='contato_delete'),
     
     path('produto_delete/<int:id>', views.produto_delete, name='produto_delete'),
     path('produto_add/', views.produto_add, name='produto_add'),
     path('produto_edit/<int:id>', views.produto_edit, name='produto_edit')
+
+
 
 ]
 
