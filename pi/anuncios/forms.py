@@ -25,7 +25,7 @@ class ContactForm(forms.Form):
 class Produto_Form(forms.ModelForm):
     class Meta:
         model = Produto
-        fields = ('nm_produto', 'categoria','dc_produto','vl_produto','st_produto','imagem')
+        fields = ('nm_produto', 'categoria','dc_produto','vl_produto','imagem','st_produto')
 
 
 
@@ -33,5 +33,14 @@ class Contato_Form(forms.ModelForm):
     class Meta:
         model = Contato
         fields = ('tp_contato','tx_contato')
+
+
+
+class Servico_Form(forms.ModelForm):
+    class Meta:
+        model = Servico
+        #fields = ('tx_titulo_servico','categoria','doc_servico','st_servico','imagem')
+        fields = ('tx_titulo_servico','categoria','dc_servico', 'imagem','st_servico')
+
 
 

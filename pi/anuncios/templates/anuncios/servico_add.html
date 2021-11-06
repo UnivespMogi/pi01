@@ -1,11 +1,11 @@
 {% extends 'base3.html' %}
 
 
-{% block title %}Adicione uma tarefa{% endblock %}
+{% block title %}Adicione um novo servico{% endblock %}
 
 {% block content %}
 <div class="offset-1 col-10 list-div">
-    <h2>Editando {{produto.nm_produto}}</h2>
+    <h2>Adicione novo servico:</h2>
 
 
 
@@ -13,7 +13,7 @@
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Salvar a edição">
+        <input type="submit" value="Adicionar novo servico">
     </form>
 
 

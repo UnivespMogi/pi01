@@ -12,6 +12,7 @@ from users.models import User
 from .forms import ContactForm
 from .forms import Produto_Form 
 from .forms import Contato_Form
+from .forms import Servico_Form
 from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
@@ -132,7 +133,7 @@ def pesquisa(request):
     anuncios = paginator.get_page(page)
     return render(request, 'anuncios/pesquisa.html', {'anuncios': anuncios})
 
-
+@login_required
 def Cadastro_produto(request):
     produtos = Produto.objects.filter(usuario=request.user)
     return render(request, 'anuncios/Cadastro_produto.html', {'produtos': produtos})
@@ -204,6 +205,7 @@ def contato_add(request):
         if form.is_valid():
             Contato = form.save(commit=False)
             Contato.usuario = request.user
+            Contato.condominio = 'Flex Mogi'
             Contato.save()
             return redirect('Cadastro_contato')
     else:
@@ -236,3 +238,57 @@ def contato_delete(request, id):
     contato.delete()
     #messages.info(request, 'Tarefa deletada com sucesso.')
     return redirect('Cadastro_contato')
+
+
+
+@login_required
+def Cadastro_servico(request):
+    servicos = Servico.objects.filter(usuario=request.user)
+    return render(request, 'anuncios/Cadastro_servico.html', {'servicos': servicos})
+
+
+@login_required
+def servico_add(request):
+    context ={}
+    if request.method == 'POST':
+ 
+        form = Servico_Form(data=request.POST, files=request.FILES)
+        if form.is_valid():
+            Servico = form.save(commit=False)
+            Servico.usuario = request.user
+            Servico.save()
+            return redirect('Cadastro_servico')
+    else:
+        form = Servico_Form()
+    context['form']=form
+    return render(request, 'anuncios/servico_add.html', context)
+
+
+@login_required
+def servico_edit(request, id):
+    servico = get_object_or_404(Servico, pk=id)
+    form = Servico_Form(instance=servico)
+
+    if (request.method == 'POST'):
+        form = Servico_Form (data=request.POST, files=request.FILES,instance=servico)
+
+        if form.is_valid():
+            #Produto = form.save(commit=False)
+            servico.save()
+            return redirect ('Cadastro_servico')
+        else:
+            return render(request, 'servico_edit', {'form': form, 'servico': servico})
+    else:
+        return render(request, 'anuncios/servico_edit.html', {'form': form, 'servico': servico})
+
+
+
+
+
+@login_required
+def servico_delete(request, id):
+    servico = get_object_or_404(Servico, pk=id)
+    servico.delete()
+    #messages.info(request, 'Tarefa deletada com sucesso.')
+    return redirect('Cadastro_servico')
+
