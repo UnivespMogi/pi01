@@ -19,7 +19,7 @@ urlpatterns = [
 
     path('fale_conosco/', views.faleConosco, name = 'fale_conosco'),  
     path('perguntas_respostas/', views.perguntasRespostas, name = 'perguntas_respostas'),  
-    path('login/', views.login, name = 'login'),  
+    #path('login/', views.login, name = 'login'),  
 
 
     path('como_anunciar/', views.comoAnunciar, name = 'como_anunciar'),  
@@ -40,11 +40,7 @@ urlpatterns = [
     path('produto_add/', views.produto_add, name='produto_add'),
     path('produto_edit/<int:id>', views.produto_edit, name='produto_edit')
 
-
-
 ]
 
-
-urlpatterns += [
-    path('accounts/', include('django.contrib.auth.urls')),
-]
+#aqui defini  o endereço do login que no padrão é registration/login
+urlpatterns += [    path('accounts/', include('django.contrib.auth.urls')),  ]

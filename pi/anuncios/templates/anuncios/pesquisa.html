@@ -31,12 +31,14 @@
 								<h3><a href="/detalhes_servico/{{anuncio.id}}">{{anuncio.tx_titulo_servico}}</a></h3>
 							{% endif %}
 						</div>
-						<div class="title">
-							<h3><a href="/detalhes_produto/{{produto.id}}">{{produto.usuario}}</a></h3>
-						</div>
+
 						<!-- Add to Cart Button -->
 						<div class="actions">
-							<a href="/detalhes_produto/{{produto.id}}" class="btn"><i class="icon-shopping-cart icon-white"></i> Visualizar</a>
+							{% if anuncio.nm_produto %}
+								<a href="/detalhes_produto/{{anuncio.id}}" class="btn"><i class="icon-shopping-cart icon-white"></i> Visualizar</a>
+							{% else %}
+								<a href="/detalhes_servico/{{anuncio.id}}" class="btn"><i class="icon-shopping-cart icon-white"></i> Visualizar</a>
+							{% endif %}
 						</div>
 					</div>
 					<!-- End Product -->

@@ -102,8 +102,8 @@ def Sucesso_envio_email(request):
 def perguntasRespostas(request):
     return render(request, 'anuncios/perguntas_respostas.html')
 
-def login(request):
-    return render(request, 'anuncios/login.html')
+#def login(request):
+#    return render(request, 'anuncios/login.html')
 
 def comoAnunciar(request):
     return render(request, 'anuncios/como_anunciar.html')
