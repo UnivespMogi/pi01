@@ -1,4 +1,4 @@
-
+from django.apps import AppConfig
 from django import forms
 from .models import Categoria, Produto, Servico, Contato
 
@@ -22,7 +22,12 @@ class ContactForm(forms.Form):
 
 
 
-class produto_Form(forms.ModelForm):
+class Produto_Form(forms.ModelForm):
     class Meta:
         model = Produto
-        fields = ('nm_produto', 'categoria','dc_produto','vl_produto','st_produto')
+        fields = ('nm_produto', 'categoria','dc_produto','vl_produto','st_produto','imagem')
+
+
+class ImageuploadForm(forms.Form):
+    name= forms.CharField()
+    image = forms.ImageField()

@@ -6,11 +6,11 @@ from random import shuffle
 from django.core.mail import send_mail, BadHeaderError
 from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseRedirect
-
+from django.template import RequestContext
 from django.db.models import Q
 from users.models import User
-from .forms import ContactForm
-from .forms import produto_Form
+from .forms import ContactForm, ImageuploadForm
+from .forms import Produto_Form
 from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
@@ -170,16 +170,83 @@ def produto_delete(request, id):
 
 @login_required
 def produto_add(request):
+    context ={}
     if request.method == 'POST':
-        form = produto_Form(request.POST)
-        
-        if form.is_valid():
+        form1 = Produto_Form(request.POST)
+        form = ImageuploadForm(request.POST,request.Files)
+
+        if form1.is_valid() and form.is_valid():
+            Produto = form1.save(commit=False)
+            #Produto.done = 'doing'
+            Produto.usuario = request.user
+            #Produto.save()
+            return redirect('/')
+    else:
+        form1 = Produto_Form()
+        form = ImageuploadForm ()
+    context['form']=form
+    return render(request, 'anuncios/produto_add.html', context)
+
+
+
+@login_required
+def produto_add(request):
+    context ={}
+    if request.method == 'POST':
+        form = ImageuploadForm(request.POST,request.Files)
+
+        if  form.is_valid():
             Produto = form.save(commit=False)
             #Produto.done = 'doing'
             Produto.usuario = request.user
             Produto.save()
             return redirect('/')
     else:
-        form = produto_Form()
-        return render(request, 'anuncios/produto_add.html', {'form': form})
+
+        form = ImageuploadForm ()
+    context['form']=form
+    return render(request, 'anuncios/produto_add.html', context)
+
+
+
+
+@login_required
+def produto_add(request):
+    context ={}
+    if request.method == 'POST':
+        form = Produto_Form(request.POST, request.Files)
+
+        if  form.is_valid():
+            Produto = form.save(commit=False)
+            Produto.usuario = request.user
+            Produto.save()
+            return redirect('/')
+    else:
+
+        form = Produto_Form()
+    context['form']=form
+    return render(request, 'anuncios/produto_add.html', context)
+
+
+
+#from somewhere import handle_uploaded_file
+
+def produto_add(request):
+    context ={}
+    if request.method == 'POST':
+        #form = UploadFileForm(data=request.POST, files=request.FILES)
+        form = Produto_Form(data=request.POST, files=request.FILES)
+        if form.is_valid():
+            #handle_uploaded_file(request.FILES['imagem'])
+            Produto = form.save(commit=False)
+            Produto.usuario = request.user
+            Produto.save()
+            return redirect('/')
+    else:
+        form = Produto_Form()
+    context['form']=form
+    return render(request, 'anuncios/produto_add.html', context)
+
+
+
 
