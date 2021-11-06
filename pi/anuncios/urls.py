@@ -27,8 +27,8 @@ urlpatterns = [
     path('pesquisa/', views.pesquisa, name = 'pesquisa'),
     #path('produto_edit/<int:id>', views.produto_edit, name='produto_edit'),
     path('produto_delete/<int:id>', views.produto_delete, name='produto_delete'),
-    path('produto_add/', views.produto_add, name='produto_add')
-
+    path('produto_add/', views.produto_add, name='produto_add'),
+    path('produto_edit/<int:id>', views.produto_edit, name='produto_edit')
 
 ]
 

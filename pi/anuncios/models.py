@@ -58,7 +58,7 @@ class Produto(models.Model):
     st_produto = models.CharField(
         max_length=1, verbose_name='Situação do Produto', choices=STATUS_CHOICES)
     imagem =models.ImageField ('img', upload_to=path_and_rename, null=True)
-    #imagem =models.ImageField ('img', null=True)
+  
 
     def __str__(self):
         return self.nm_produto

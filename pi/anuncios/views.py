@@ -9,7 +9,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.db.models import Q
 from users.models import User
-from .forms import ContactForm, ImageuploadForm
+from .forms import ContactForm
 from .forms import Produto_Form
 from django.contrib import messages
 
@@ -158,95 +158,48 @@ def Cadastro_servico(request):
     #else:
         #return render(request, 'tasks/edittask.html', {'form': form, 'task': task})
 
+
+@login_required
+def produto_edit(request, id):
+    produto = get_object_or_404(Produto, pk=id)
+    form = Produto_Form(instance=produto)
+
+    if (request.method == 'POST'):
+        form = Produto_Form (data=request.POST, files=request.FILES,instance=produto)
+
+        if form.is_valid():
+            #Produto = form.save(commit=False)
+            produto.save()
+            return redirect ('Cadastro_produto')
+        else:
+            return render(request, 'produto_edit', {'form': form, 'produto': produto})
+    else:
+        return render(request, 'anuncios/produto_edit.html', {'form': form, 'produto': produto})
+
+
 @login_required
 def produto_delete(request, id):
     produto = get_object_or_404(Produto, pk=id)
-    #produto.delete()
-
-    messages.info(request, 'Tarefa deletada com sucesso.')
-
+    produto.delete()
+    #messages.info(request, 'Tarefa deletada com sucesso.')
     return redirect('Cadastro_produto')
 
 
-@login_required
-def produto_add(request):
-    context ={}
-    if request.method == 'POST':
-        form1 = Produto_Form(request.POST)
-        form = ImageuploadForm(request.POST,request.Files)
-
-        if form1.is_valid() and form.is_valid():
-            Produto = form1.save(commit=False)
-            #Produto.done = 'doing'
-            Produto.usuario = request.user
-            #Produto.save()
-            return redirect('/')
-    else:
-        form1 = Produto_Form()
-        form = ImageuploadForm ()
-    context['form']=form
-    return render(request, 'anuncios/produto_add.html', context)
-
-
 
 @login_required
 def produto_add(request):
     context ={}
     if request.method == 'POST':
-        form = ImageuploadForm(request.POST,request.Files)
-
-        if  form.is_valid():
-            Produto = form.save(commit=False)
-            #Produto.done = 'doing'
-            Produto.usuario = request.user
-            Produto.save()
-            return redirect('/')
-    else:
-
-        form = ImageuploadForm ()
-    context['form']=form
-    return render(request, 'anuncios/produto_add.html', context)
-
-
-
-
-@login_required
-def produto_add(request):
-    context ={}
-    if request.method == 'POST':
-        form = Produto_Form(request.POST, request.Files)
-
-        if  form.is_valid():
-            Produto = form.save(commit=False)
-            Produto.usuario = request.user
-            Produto.save()
-            return redirect('/')
-    else:
-
-        form = Produto_Form()
-    context['form']=form
-    return render(request, 'anuncios/produto_add.html', context)
-
-
-
-#from somewhere import handle_uploaded_file
-
-def produto_add(request):
-    context ={}
-    if request.method == 'POST':
-        #form = UploadFileForm(data=request.POST, files=request.FILES)
+ 
         form = Produto_Form(data=request.POST, files=request.FILES)
         if form.is_valid():
-            #handle_uploaded_file(request.FILES['imagem'])
             Produto = form.save(commit=False)
             Produto.usuario = request.user
             Produto.save()
-            return redirect('/')
+            return redirect('Cadastro_produto')
     else:
         form = Produto_Form()
     context['form']=form
     return render(request, 'anuncios/produto_add.html', context)
-
-
 
 

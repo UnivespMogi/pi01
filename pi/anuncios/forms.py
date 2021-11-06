@@ -28,6 +28,7 @@ class Produto_Form(forms.ModelForm):
         fields = ('nm_produto', 'categoria','dc_produto','vl_produto','st_produto','imagem')
 
 
-class ImageuploadForm(forms.Form):
-    name= forms.CharField()
-    image = forms.ImageField()
+
+
+
+

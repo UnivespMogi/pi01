@@ -46,7 +46,7 @@
 							{% for produto in produtos %}
 							<li class="task-list">
 									<span><a href="/produto/{{produto.id}}">{{produto.nm_produto}}</a></span>
-									<a href="/produto_delete/{{produto.id}}?next={{request.path}}" class="delete-btn"><span><i class="fas fa-trash"></i></span></a>
+									<a href="/produto_delete/{{produto.id}}" class="delete-btn"><span><i class="fas fa-trash"></i></span></a>
 									<a href="/produto_edit/{{produto.id}}"><span><i class="fas fa-edit"></i></span></a>
 									<a href="/produto_changestatus/{{produto.id}}"><i class="fas fa-check"></i></a>
 							</li>
