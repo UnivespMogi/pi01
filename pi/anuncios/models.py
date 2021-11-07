@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib import admin
+from django.conf import settings
 from django.db.models.deletion import CASCADE
 from users.models import User
 from django.db.models.fields import CharField, DateTimeField, IntegerField
@@ -46,7 +47,7 @@ class Produto(models.Model):
         ('I', 'Inativo'),
     )
     usuario = models.ForeignKey(
-        User, on_delete=CASCADE, related_name='fk_produto_user1', default=User, null=True)
+        settings.AUTH_USER_MODEL, on_delete=CASCADE, related_name='fk_produto_user1', default=User, null=True)
     categoria = models.ForeignKey(
         'Categoria', on_delete=CASCADE, related_name='fk_produto_categoria1', limit_choices_to={'tp_categoria': 'P'})
     nm_produto = models.CharField(

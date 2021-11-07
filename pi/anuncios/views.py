@@ -8,7 +8,6 @@ from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.db.models import Q
-from users.models import User
 from .forms import ContactForm
 from .forms import Produto_Form 
 from .forms import Contato_Form
@@ -119,7 +118,7 @@ def pesquisa(request):
 
     if search:
         p1 = list(Produto.objects.filter(Q(nm_produto__contains=search) ))
-        p2 = list(Servico.objects.filter(Q(dc_servico__contains=search) ))
+        p2 = list(Servico.objects.filter(Q(tx_titulo_servico__contains=search) ))
         lista = p1 + p2
         #shuffle(lista)
 

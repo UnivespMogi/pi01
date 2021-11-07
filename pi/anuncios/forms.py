@@ -1,6 +1,7 @@
 from django.apps import AppConfig
 from django import forms
 from .models import Categoria, Produto, Servico, Contato
+from users.models import User
 
 
 
@@ -41,6 +42,3 @@ class Servico_Form(forms.ModelForm):
         model = Servico
         #fields = ('tx_titulo_servico','categoria','doc_servico','st_servico','imagem')
         fields = ('tx_titulo_servico','categoria','dc_servico', 'imagem','st_servico')
-
-
-
