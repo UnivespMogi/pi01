@@ -56,7 +56,7 @@ def detalhesProduto(request  ,id ):
     if request.user.is_anonymous:
         is_Morador = False
     else:
-        is_Morador = Group.objects.filter(user=request.user,name='morador').exists()
+        is_Morador = Group.objects.filter(user=request.user,name='Morador').exists()
 
     produto = Produto.objects.get(id=id)
 
@@ -75,8 +75,19 @@ def detalhesProdutoCarrossel(request):
     return render(request, 'anuncios/detalhes_produto_carrossel.html')
 
 def detalhesServico(request,id):
+
+    if request.user.is_anonymous:
+        is_Morador = False
+    else:
+        is_Morador = Group.objects.filter(user=request.user,name='Morador').exists()
+
     servico = Servico.objects.get(id=id)
-    contatos = Contato.objects.filter(usuario = servico.usuario)
+
+    if is_Morador:
+        contatos = Contato.objects.filter(usuario = servico.usuario)
+    else:
+        contatos = Contato.objects.filter(id = 0)
+
     return render(request, 'anuncios/detalhes_servico.html',{'servico':servico,'contatos' : contatos})
 
 
