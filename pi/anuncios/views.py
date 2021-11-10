@@ -21,11 +21,24 @@ def index(request):
     return render(request, 'anuncios/index.html')
 
 def produtos(request):
-    categorias = Categoria.objects.filter(tp_categoria = 'P')
+    categorias_todas = list(Categoria.objects.filter(tp_categoria = 'P'))
+
+    categorias = []
+    for itens in categorias_todas:
+        if Produto.objects.filter(categoria = itens.id, st_produto='A').count()>0:
+            categorias.append(itens)
+
+
     return render(request, 'anuncios/produtos.html', {'categorias': categorias})
 
 def servicos(request):
-    categorias = Categoria.objects.filter(tp_categoria = 'S')
+    categorias_todas = list(Categoria.objects.filter(tp_categoria = 'S'))
+
+    categorias = []
+    for itens in categorias_todas:
+        if Servico.objects.filter(categoria = itens.id, st_servico='A').count()>0:
+            categorias.append(itens)
+
     return render(request, 'anuncios/servicos.html', {'categorias': categorias})
 
 def listaProdutos(request,id):
