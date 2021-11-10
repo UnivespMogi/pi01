@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.core import paginator
 from django.shortcuts import render, redirect,get_object_or_404
 from .models import Categoria, Produto, Servico, Contato
@@ -14,7 +14,7 @@ from .forms import Contato_Form
 from .forms import Servico_Form
 from django.contrib import messages
 
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 
 def index(request):
@@ -50,9 +50,21 @@ def listaServicos(request,id):
 
     return render(request, 'anuncios/lista_servicos.html', {'servicos': servicos,'categoria':categoria})
 
+
 def detalhesProduto(request  ,id ):
+
+    if request.user.is_anonymous:
+        is_Morador = False
+    else:
+        is_Morador = Group.objects.filter(user=request.user,name='morador').exists()
+
     produto = Produto.objects.get(id=id)
-    contatos = Contato.objects.filter(usuario = produto.usuario)
+
+    if is_Morador:
+        contatos = Contato.objects.filter(usuario = produto.usuario)
+    else:
+        contatos = Contato.objects.filter(id = 0)
+    
     mensagem = 'Oi, me interesse pelo seu Produto\nGostaria que verificar o valor.\nPodemos conversar'
     return render(request, 'anuncios/detalhes_produto.html', {'produto': produto,'contatos' : contatos, 'mensagem': mensagem})
 
@@ -132,13 +144,20 @@ def pesquisa(request):
     anuncios = paginator.get_page(page)
     return render(request, 'anuncios/pesquisa.html', {'anuncios': anuncios})
 
+
+def is_Anunciante(user):
+    return user.groups.filter(name='Anunciante').exists() or user.is_superuser
+
+
 @login_required
+@user_passes_test(is_Anunciante)
 def Cadastro_produto(request):
     produtos = Produto.objects.filter(usuario=request.user)
     return render(request, 'anuncios/Cadastro_produto.html', {'produtos': produtos})
 
 
 @login_required
+@user_passes_test(is_Anunciante)
 def Cadastro_servico(request):
     servicos = Servico.objects.filter(usuario=request.user)
     return render(request, 'anuncios/Cadastro_produto.html', {'servicos': servicos})
@@ -146,8 +165,13 @@ def Cadastro_servico(request):
 
 
 @login_required
+@user_passes_test(is_Anunciante)
 def produto_edit(request, id):
     produto = get_object_or_404(Produto, pk=id)
+
+    if produto.usuario != request.user:
+        return redirect ('Cadastro_produto')
+
     form = Produto_Form(instance=produto)
 
     if (request.method == 'POST'):
@@ -164,8 +188,14 @@ def produto_edit(request, id):
 
 
 @login_required
+@user_passes_test(is_Anunciante)
 def produto_delete(request, id):
     produto = get_object_or_404(Produto, pk=id)
+
+    
+    if produto.usuario != request.user:
+        return redirect ('Cadastro_produto')
+    
     produto.delete()
     #messages.info(request, 'Tarefa deletada com sucesso.')
     return redirect('Cadastro_produto')
@@ -173,6 +203,7 @@ def produto_delete(request, id):
 
 
 @login_required
+@user_passes_test(is_Anunciante)
 def produto_add(request):
     context ={}
     if request.method == 'POST':
@@ -190,12 +221,14 @@ def produto_add(request):
 
 
 @login_required
+@user_passes_test(is_Anunciante)
 def Cadastro_contato(request):
     contatos = Contato.objects.filter(usuario=request.user)
     return render(request, 'anuncios/Cadastro_contato.html', {'contatos': contatos})
 
 
 @login_required
+@user_passes_test(is_Anunciante)
 def contato_add(request):
     context ={}
     if request.method == 'POST':
@@ -214,8 +247,13 @@ def contato_add(request):
 
 
 @login_required
+@user_passes_test(is_Anunciante)
 def contato_edit(request, id):
     contato = get_object_or_404(Contato, pk=id)
+
+    if contato.usuario != request.user:
+        return redirect ('Cadastro_produto')
+
     form = Contato_Form(instance=contato)
 
     if (request.method == 'POST'):
@@ -232,8 +270,14 @@ def contato_edit(request, id):
 
 
 @login_required
+@user_passes_test(is_Anunciante)
 def contato_delete(request, id):
     contato = get_object_or_404(Contato, pk=id)
+
+    if contato.usuario != request.user:
+        return redirect ('Cadastro_produto')
+
+
     contato.delete()
     #messages.info(request, 'Tarefa deletada com sucesso.')
     return redirect('Cadastro_contato')
@@ -241,12 +285,14 @@ def contato_delete(request, id):
 
 
 @login_required
+@user_passes_test(is_Anunciante)
 def Cadastro_servico(request):
     servicos = Servico.objects.filter(usuario=request.user)
     return render(request, 'anuncios/Cadastro_servico.html', {'servicos': servicos})
 
 
 @login_required
+@user_passes_test(is_Anunciante)
 def servico_add(request):
     context ={}
     if request.method == 'POST':
@@ -264,8 +310,13 @@ def servico_add(request):
 
 
 @login_required
+@user_passes_test(is_Anunciante)
 def servico_edit(request, id):
     servico = get_object_or_404(Servico, pk=id)
+
+    if servico.usuario != request.user:
+        return redirect ('Cadastro_produto')
+
     form = Servico_Form(instance=servico)
 
     if (request.method == 'POST'):
@@ -282,11 +333,14 @@ def servico_edit(request, id):
 
 
 
-
-
 @login_required
+@user_passes_test(is_Anunciante)
 def servico_delete(request, id):
     servico = get_object_or_404(Servico, pk=id)
+    
+    if servico.usuario != request.user:
+        return redirect ('Cadastro_produto')
+
     servico.delete()
     #messages.info(request, 'Tarefa deletada com sucesso.')
     return redirect('Cadastro_servico')
