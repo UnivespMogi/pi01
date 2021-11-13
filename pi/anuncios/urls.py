@@ -1,8 +1,12 @@
 from django.urls import path, include
 from . import views
 
+app_name = 'anuncios'
+
 urlpatterns = [
-    path('', views.index, name = 'index'),
+    #path('', views.index, name = 'index'),
+    path('', views.IndexView.as_view(), name='index'),
+
     path('produtos/', views.produtos, name = 'produtos'),
     path('servicos/', views.servicos, name = 'servicos'),
     path('lista_produtos/<int:id>', views.listaProdutos, name = 'lista_produtos'),
@@ -39,9 +43,9 @@ urlpatterns = [
 
     path('produto_delete/<int:id>', views.produto_delete, name='produto_delete'),
     path('produto_add/', views.produto_add, name='produto_add'),
-    path('produto_edit/<int:id>', views.produto_edit, name='produto_edit')
+    path('produto_edit/<int:id>', views.produto_edit, name='produto_edit'),
 
 ]
 
 #aqui defini  o endereço do login que no padrão é registration/login
-urlpatterns += [    path('accounts/', include('django.contrib.auth.urls')),  ]
+#urlpatterns += [    path('accounts/', include('django.contrib.auth.urls')),  ]

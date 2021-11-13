@@ -1,3 +1,4 @@
+from django import template
 from django.contrib.auth import models, get_user_model
 from django.contrib.auth.models import User, Group
 from django.core import paginator
@@ -16,10 +17,13 @@ from .forms import Servico_Form
 from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.views.generic import TemplateView
 
+class IndexView(TemplateView):
+    template_name = 'anuncios/index.html'
 
-def index(request):
-    return render(request, 'anuncios/index.html')
+#def index(request):
+#    return render(request, 'anuncios/index.html')
 
 def produtos(request):
 
@@ -417,3 +421,4 @@ def anunciante_servicos(request, id):
 
 
     return render(request, 'anuncios/anunciante_servicos.html',{'servicos': servicos, 'usuario_id': usuario_id} )
+
