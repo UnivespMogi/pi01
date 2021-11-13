@@ -19,11 +19,11 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.views.generic import TemplateView
 
-class IndexView(TemplateView):
-    template_name = 'anuncios/index.html'
+#class IndexView(TemplateView):
+#    template_name = 'anuncios/index.html'
 
-#def index(request):
-#    return render(request, 'anuncios/index.html')
+def index(request):
+    return render(request, 'anuncios/index.html')
 
 def produtos(request):
 
@@ -125,7 +125,6 @@ def detalhesServico(request,id):
         contatos = Contato.objects.filter(id = 0)
 
     return render(request, 'anuncios/detalhes_servico.html',{'servico':servico,'contatos' : contatos})
-
 
 def politicaPrivacidade(request):
     return render(request, 'anuncios/politica_privacidade.html')

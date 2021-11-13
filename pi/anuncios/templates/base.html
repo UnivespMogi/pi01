@@ -52,12 +52,16 @@
                             <li>
                                 <a href="{% url 'logout'%}?next={{request.path}}">
                                 <i class="fas fa-sign-out-alt"></i>
-                                Sair?</a>
+                                Sair</a>
                             </li>
                         {% else %}
                             <li>
                                 <i class="fas fa-user"></i>
                                 <a href="{% url 'login'%}?next={{request.path}}">Faça seu login</a>
+                            </li>
+                            <li>
+                                <i class="fas fa-paper-plane"></i>
+                                <a href="/accounts/signup">Solicitar cadastro</a>
                             </li>
                         {% endif %} 
                     </ul>

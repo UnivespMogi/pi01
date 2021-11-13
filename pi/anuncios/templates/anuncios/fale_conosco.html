@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
 {% load static %}
 {% block title %}Flex Mogi - Anúncios{% endblock %}
 
@@ -15,7 +17,7 @@
 							<div class="form-group">
 								<form method="post">
 									{% csrf_token %}
-									{{ form.as_p }}
+									{{ form|crispy }}
 									<div class="form-actions">
 										<button class="btn" type="submit">Enviar</button>
 									</div>

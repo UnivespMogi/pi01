@@ -43,11 +43,11 @@ INSTALLED_APPS = [
     'anuncios',
     'users.apps.UsersConfig',
 
-    
     # 3rd part
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -178,3 +178,6 @@ ACCOUNT_USERNAME_REQUIRED =False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
+
+#django-crispy-forms
+CRISPY_TEMPLATE_PACK = "bootstrap4"
