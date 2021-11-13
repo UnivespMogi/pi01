@@ -404,7 +404,7 @@ def anunciante_produtos(request, id):
     todos_usuarios = get_user_model()
     usuario_id = todos_usuarios.objects.get (username=id)
 
-    produtos = Produto.objects.filter(usuario=usuario_id)
+    produtos = Produto.objects.filter(usuario=usuario_id,st_produto='A').order_by('dt_cadastro').exclude(usuario__in = usuarios_inativos())
 
     paginator = Paginator(produtos, 3)
     page = request.GET.get('page')
@@ -419,7 +419,7 @@ def anunciante_servicos(request, id):
     todos_usuarios = get_user_model()
     usuario_id = todos_usuarios.objects.get (username=id)
 
-    servicos = Servico.objects.filter(usuario=usuario_id)
+    servicos = Servico.objects.filter(usuario=usuario_id,st_servico='A').exclude(usuario__in = usuarios_inativos())
     
     paginator = Paginator(servicos, 3)
     page = request.GET.get('page')
