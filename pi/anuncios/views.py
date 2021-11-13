@@ -24,32 +24,10 @@ class IndexView(TemplateView):
 
 #def index(request):
 #    return render(request, 'anuncios/index.html')
-
-def produtos(request):
-
-    categorias_todas = list(Categoria.objects.filter(tp_categoria = 'P'))
-
-    categorias = []
-    for itens in categorias_todas:
-        if Produto.objects.filter(categoria = itens.id, st_produto='A').count()>0:
-            categorias.append(itens)
-
-
-    return render(request, 'anuncios/produtos.html', {'categorias': categorias})
-
-def servicos(request):
-    categorias_todas = list(Categoria.objects.filter(tp_categoria = 'S'))
-
-    categorias = []
-    for itens in categorias_todas:
-        if Servico.objects.filter(categoria = itens.id, st_servico='A').count()>0:
-            categorias.append(itens)
-
-    return render(request, 'anuncios/servicos.html', {'categorias': categorias})
-
-
 # lista de usuarios com o filtro inativo selecionado
-def usuarios_filtro_inativo():
+
+
+def usuarios_inativos():
     group = Group.objects.get(name = 'Inativo')
     usersx = group.user_set.all()
     
@@ -61,9 +39,37 @@ def usuarios_filtro_inativo():
     return list
 
 
+
+
+def produtos(request):
+
+    categorias_todas = list(Categoria.objects.filter(tp_categoria = 'P'))
+
+    categorias = []
+    for itens in categorias_todas:
+        if Produto.objects.filter(categoria = itens.id, st_produto='A').exclude(usuario__in = usuarios_inativos()).count()>0:
+            categorias.append(itens)
+
+
+    return render(request, 'anuncios/produtos.html', {'categorias': categorias})
+
+def servicos(request):
+    categorias_todas = list(Categoria.objects.filter(tp_categoria = 'S'))
+
+    categorias = []
+    for itens in categorias_todas:
+        if Servico.objects.filter(categoria = itens.id, st_servico='A').exclude(usuario__in = usuarios_inativos()).count()>0:
+            categorias.append(itens)
+
+    return render(request, 'anuncios/servicos.html', {'categorias': categorias})
+
+
+
+
+
 def listaProdutos(request,id):
  
-    produtos = Produto.objects.filter(categoria=id,st_produto='A').order_by('dt_cadastro').exclude(usuario__in = usuarios_filtro_inativo() )
+    produtos = Produto.objects.filter(categoria=id,st_produto='A').order_by('dt_cadastro').exclude(usuario__in = usuarios_inativos() )
 
     
     #shuffle(produtos)
@@ -76,7 +82,7 @@ def listaProdutos(request,id):
     return render(request, 'anuncios/lista_produtos.html', {'produtos': produtos,'categoria':categoria})
 
 def listaServicos(request,id):
-    servicos = list(Servico.objects.filter(categoria=id,st_servico='A'))
+    servicos = list(Servico.objects.filter(categoria=id,st_servico='A').order_by('dt_cadastro').exclude(usuario__in = usuarios_inativos()))
     #shuffle(servicos)
     categoria = Categoria.objects.get(id=id)
 
