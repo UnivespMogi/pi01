@@ -1,3 +1,4 @@
+from django.contrib.auth import models, get_user_model
 from django.contrib.auth.models import User, Group
 from django.core import paginator
 from django.shortcuts import render, redirect,get_object_or_404
@@ -21,6 +22,7 @@ def index(request):
     return render(request, 'anuncios/index.html')
 
 def produtos(request):
+
     categorias_todas = list(Categoria.objects.filter(tp_categoria = 'P'))
 
     categorias = []
@@ -41,8 +43,25 @@ def servicos(request):
 
     return render(request, 'anuncios/servicos.html', {'categorias': categorias})
 
+
+# lista de usuarios com o filtro inativo selecionado
+def usuarios_filtro_inativo():
+    group = Group.objects.get(name = 'Inativo')
+    usersx = group.user_set.all()
+    
+    list = []
+    
+    for item in usersx:
+        list.append(item.id)
+
+    return list
+
+
 def listaProdutos(request,id):
-    produtos = list(Produto.objects.filter(categoria=id,st_produto='A').order_by('dt_cadastro'))
+ 
+    produtos = Produto.objects.filter(categoria=id,st_produto='A').order_by('dt_cadastro').exclude(usuario__in = usuarios_filtro_inativo() )
+
+    
     #shuffle(produtos)
     categoria = Categoria.objects.get(id=id)
 
@@ -140,8 +159,7 @@ def perguntasRespostas(request):
 #def login(request):
 #    return render(request, 'anuncios/login.html')
 
-def comoAnunciar(request):
-    return render(request, 'anuncios/como_anunciar.html')
+
 
 def politicaCookies(request):
     return render(request, 'anuncios/politica_cookies.html')
@@ -369,3 +387,33 @@ def servico_delete(request, id):
     #messages.info(request, 'Tarefa deletada com sucesso.')
     return redirect('Cadastro_servico')
 
+
+
+def anunciante_produtos(request, id):
+
+    todos_usuarios = get_user_model()
+    usuario_id = todos_usuarios.objects.get (username=id)
+
+    produtos = Produto.objects.filter(usuario=usuario_id)
+
+    paginator = Paginator(produtos, 3)
+    page = request.GET.get('page')
+    produtos = paginator.get_page(page)
+
+
+    return render(request, 'anuncios/anunciante_produtos.html',{'produtos': produtos, 'usuario_id': usuario_id} )
+
+
+def anunciante_servicos(request, id):
+
+    todos_usuarios = get_user_model()
+    usuario_id = todos_usuarios.objects.get (username=id)
+
+    servicos = Servico.objects.filter(usuario=usuario_id)
+    
+    paginator = Paginator(servicos, 3)
+    page = request.GET.get('page')
+    servicos = paginator.get_page(page)
+
+
+    return render(request, 'anuncios/anunciante_servicos.html',{'servicos': servicos, 'usuario_id': usuario_id} )

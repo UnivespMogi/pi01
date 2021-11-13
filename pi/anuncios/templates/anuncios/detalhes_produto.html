@@ -38,9 +38,11 @@
 						</p>
                         <h3>R$ {{produto.vl_produto|floatformat:2}}</h3>
 						<br>
-						<h4>Fornecedor: {{produto.usuario}}<h4>
+						<h4>Anunciante: {{produto.usuario}}</h4>
 
-
+                        
+                            <h5>	<a href="/anunciante_produtos/{{produto.usuario}}">ver outros produtos deste anunciante</a></h5>
+						
 
 						<strong>Contato(s):
 

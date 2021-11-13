@@ -109,6 +109,13 @@ h4 {
   color: #53555c;
   margin-bottom: 10px;
 }
+
+
+h5 {
+  font-family: 'Open Sans', sans-serif;
+  color: #53555c;
+  font-size: 1em;
+}
 a {
   color: #4f8db3;
 }
@@ -367,6 +374,13 @@ a:hover {
     background-clip: padding-box;
     z-index: 4;
   }
+  .novidade-texto img {
+    max-width: 100%;
+    margin: 30px auto;
+    display: block;
+    max-height: 100px;
+  }
+}
 }
 /*--------------------------------------------------------------------------
 +	Contact Us Style

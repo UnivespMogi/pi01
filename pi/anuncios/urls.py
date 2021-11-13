@@ -22,10 +22,11 @@ urlpatterns = [
     #path('login/', views.login, name = 'login'),  
 
 
-    path('como_anunciar/', views.comoAnunciar, name = 'como_anunciar'),  
+    #path('como_anunciar/', views.comoAnunciar, name = 'como_anunciar'),  
     path('politica_cookies/', views.politicaCookies, name = 'politica_cookies'),  
     path('termos_uso/', views.termosUso, name = 'termos_uso'),  
-
+    path('anunciante_produtos/<str:id>', views.anunciante_produtos, name = 'anunciante_produtos'),  
+    path('anunciante_servicos/<str:id>', views.anunciante_servicos, name = 'anunciante_servicos'),  
     path('pesquisa/', views.pesquisa, name = 'pesquisa'),
 
     path('servico_add/', views.servico_add, name='servico_add'),

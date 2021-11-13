@@ -45,9 +45,13 @@
 							{% for produto in produtos %}
 							<li class="task-list">
 									<span><a href="/produto/{{produto.id}}">{{produto.nm_produto}}</a></span>
+									<div class="novidade-texto">
+										<img src="{{produto.imagem.url}}" >
+									</div>
 									<a href="/produto_delete/{{produto.id}}" class="delete-btn"><span><i class="fas fa-trash"></i></span></a>
 									<a href="/produto_edit/{{produto.id}}"><span><i class="fas fa-edit"></i></span></a>
 									<a href="/produto_changestatus/{{produto.id}}"><i class="fas fa-check"></i></a>
+
 							</li>
 							{% endfor %}
 						</ul>
