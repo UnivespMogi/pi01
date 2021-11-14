@@ -22,34 +22,16 @@ from django.views.generic import TemplateView
 #class IndexView(TemplateView):
 #    template_name = 'anuncios/index.html'
 
+<<<<<<< HEAD
 def index(request):
     return render(request, 'anuncios/index.html')
-
-def produtos(request):
-
-    categorias_todas = list(Categoria.objects.filter(tp_categoria = 'P'))
-
-    categorias = []
-    for itens in categorias_todas:
-        if Produto.objects.filter(categoria = itens.id, st_produto='A').count()>0:
-            categorias.append(itens)
-
-
-    return render(request, 'anuncios/produtos.html', {'categorias': categorias})
-
-def servicos(request):
-    categorias_todas = list(Categoria.objects.filter(tp_categoria = 'S'))
-
-    categorias = []
-    for itens in categorias_todas:
-        if Servico.objects.filter(categoria = itens.id, st_servico='A').count()>0:
-            categorias.append(itens)
-
-    return render(request, 'anuncios/servicos.html', {'categorias': categorias})
-
-
+=======
+#def index(request):
+#    return render(request, 'anuncios/index.html')
 # lista de usuarios com o filtro inativo selecionado
-def usuarios_filtro_inativo():
+
+
+def usuarios_inativos():
     group = Group.objects.get(name = 'Inativo')
     usersx = group.user_set.all()
     
@@ -61,9 +43,38 @@ def usuarios_filtro_inativo():
     return list
 
 
+
+>>>>>>> 08f06309c0a5b8b2c1be9948a307cd33cf2cb54c
+
+def produtos(request):
+
+    categorias_todas = list(Categoria.objects.filter(tp_categoria = 'P'))
+
+    categorias = []
+    for itens in categorias_todas:
+        if Produto.objects.filter(categoria = itens.id, st_produto='A').exclude(usuario__in = usuarios_inativos()).count()>0:
+            categorias.append(itens)
+
+
+    return render(request, 'anuncios/produtos.html', {'categorias': categorias})
+
+def servicos(request):
+    categorias_todas = list(Categoria.objects.filter(tp_categoria = 'S'))
+
+    categorias = []
+    for itens in categorias_todas:
+        if Servico.objects.filter(categoria = itens.id, st_servico='A').exclude(usuario__in = usuarios_inativos()).count()>0:
+            categorias.append(itens)
+
+    return render(request, 'anuncios/servicos.html', {'categorias': categorias})
+
+
+
+
+
 def listaProdutos(request,id):
  
-    produtos = Produto.objects.filter(categoria=id,st_produto='A').order_by('dt_cadastro').exclude(usuario__in = usuarios_filtro_inativo() )
+    produtos = Produto.objects.filter(categoria=id,st_produto='A').order_by('dt_cadastro').exclude(usuario__in = usuarios_inativos() )
 
     
     #shuffle(produtos)
@@ -76,7 +87,7 @@ def listaProdutos(request,id):
     return render(request, 'anuncios/lista_produtos.html', {'produtos': produtos,'categoria':categoria})
 
 def listaServicos(request,id):
-    servicos = list(Servico.objects.filter(categoria=id,st_servico='A'))
+    servicos = list(Servico.objects.filter(categoria=id,st_servico='A').order_by('dt_cadastro').exclude(usuario__in = usuarios_inativos()))
     #shuffle(servicos)
     categoria = Categoria.objects.get(id=id)
 
@@ -397,7 +408,7 @@ def anunciante_produtos(request, id):
     todos_usuarios = get_user_model()
     usuario_id = todos_usuarios.objects.get (username=id)
 
-    produtos = Produto.objects.filter(usuario=usuario_id)
+    produtos = Produto.objects.filter(usuario=usuario_id,st_produto='A').order_by('dt_cadastro').exclude(usuario__in = usuarios_inativos())
 
     paginator = Paginator(produtos, 3)
     page = request.GET.get('page')
@@ -412,7 +423,7 @@ def anunciante_servicos(request, id):
     todos_usuarios = get_user_model()
     usuario_id = todos_usuarios.objects.get (username=id)
 
-    servicos = Servico.objects.filter(usuario=usuario_id)
+    servicos = Servico.objects.filter(usuario=usuario_id,st_servico='A').exclude(usuario__in = usuarios_inativos())
     
     paginator = Paginator(servicos, 3)
     page = request.GET.get('page')
