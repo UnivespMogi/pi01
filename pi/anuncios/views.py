@@ -22,29 +22,22 @@ from django.views.generic import TemplateView
 #class IndexView(TemplateView):
 #    template_name = 'anuncios/index.html'
 
-<<<<<<< HEAD
 def index(request):
     return render(request, 'anuncios/index.html')
-=======
-#def index(request):
-#    return render(request, 'anuncios/index.html')
-# lista de usuarios com o filtro inativo selecionado
+
 
 
 def usuarios_inativos():
     group = Group.objects.get(name = 'Inativo')
     usersx = group.user_set.all()
-    
+
     list = []
-    
+
     for item in usersx:
         list.append(item.id)
 
     return list
 
-
-
->>>>>>> 08f06309c0a5b8b2c1be9948a307cd33cf2cb54c
 
 def produtos(request):
 
