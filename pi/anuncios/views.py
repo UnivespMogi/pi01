@@ -15,6 +15,7 @@ from .forms import Produto_Form
 from .forms import Contato_Form
 from .forms import Servico_Form
 from django.contrib import messages
+from django.conf import settings
 
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.views.generic import TemplateView

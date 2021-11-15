@@ -141,23 +141,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #MEDIA_URL = '/anuncios/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'anuncios')
 DEFAULT_FROM_EMAIL = 'univespmogi5@hotmail.com'
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' # trocar console ->smtp
-EMAIL_HOST = 'smtp.sendgrid.net' # new
-EMAIL_HOST_USER = 'apikey' # new
-EMAIL_HOST_PASSWORD = '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' # new
-EMAIL_PORT = 465 # new
-EMAIL_USE_TLS = True # new
-EMAIL_USE_SSL = False
 
-
-EMAIL_HOST = 'smtp-mail.outlook.com' # new
-EMAIL_HOST_USER = 'mogiunivesp5@hotmail.com' # new
-EMAIL_HOST_PASSWORD = 'quinteto5'
-
-
-EMAIL_PORT = 587 # new
-EMAIL_USE_TLS = True # new
-EMAIL_USE_SSL = False
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # trocar console ->smtp
+EMAIL_HOST = 'smtp.gmail.com'  # new
+EMAIL_HOST_USER = 'mogiunivesp5@gmail.com'  # new
+EMAIL_HOST_PASSWORD = 'dnihoissogcshezy'  # new
+EMAIL_PORT = 587  # new
+EMAIL_USE_TLS = True  # new
 
 LOGIN_REDIRECT_URL = '/'
 
@@ -165,7 +155,6 @@ LOGIN_REDIRECT_URL = '/'
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
-
 ]
 
 SITE_ID = 1
@@ -173,11 +162,13 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_SESSION_REMEMBER = True
 #EMAIL_BACKEND = 'dj'
-ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
-ACCOUNT_USERNAME_REQUIRED =False
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
+ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
-#django-crispy-forms
+
+# django-crispy-forms
 CRISPY_TEMPLATE_PACK = "bootstrap4"
