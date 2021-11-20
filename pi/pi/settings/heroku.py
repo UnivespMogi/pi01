@@ -4,7 +4,7 @@ from pi.settings.base import *
 
 env = environ.Env()
 
-DEBUG = env.bool ("DEBUL", False)
+DEBUG = env.bool ("DEBUG", False)
 
 SECRET_KEY = env ("SECRET_KEY")
 
