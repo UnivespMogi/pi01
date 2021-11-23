@@ -21,11 +21,20 @@ class UserAdmin(auth_admin.UserAdmin):
                     'last_name', 'id')
     search_fields = ('username', 'email', 'first_name', 'last_name', 'id')
 
-    fieldsets = [
-        (None, {'fields': ('username', 'password')}),
+    add_fieldsets = (
+        (None, {
+            'fields': ('username', 'password')}),
         (('Informações Pessoais'), {
             'fields': ('first_name', 'last_name', 'email')}),
-    ]
+    )
+
+    def get_fieldsets(self, request, obj=None):
+        # Se for o superuser apresenta todos os campos
+        if request.user.is_superuser:
+            return super().get_fieldsets(request, obj)
+        else:
+        # Se for usuário comum, restringe a exibição dos campos
+            return self.add_fieldsets
 
     def get_queryset(self, request):
         # Get the logged in user
