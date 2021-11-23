@@ -4,9 +4,11 @@ from anuncios.models import Contato
 from .forms import UserChangeForm, UserCreationForm
 from .models import User
 
+
 class ContatoInline(admin.TabularInline):
     model = Contato
     extra = 3
+
 
 @admin.register(User)
 class UserAdmin(auth_admin.UserAdmin):
@@ -18,6 +20,12 @@ class UserAdmin(auth_admin.UserAdmin):
     list_display = ('username', 'email', 'first_name',
                     'last_name', 'id')
     search_fields = ('username', 'email', 'first_name', 'last_name', 'id')
+
+    fieldsets = [
+        (None, {'fields': ('username', 'password')}),
+        (('Informações Pessoais'), {
+            'fields': ('first_name', 'last_name', 'email')}),
+    ]
 
     def get_queryset(self, request):
         # Get the logged in user
